@@ -1,0 +1,815 @@
+[
+    {
+        "name": "Theater Key",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "Cycle P Key",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "Cycle U Key",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "Cycle V Key",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "Cycle C Key",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "Proof Of Soul",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "One Small Step for Saturday",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "Escape Room Key",
+        "classification_count": {
+            "useful + progression": 1
+        },
+        "category": [
+            "Core Items"
+        ]
+    },
+    {
+        "name": "10 Betweenspace crystals",
+        "classification_count": {
+            "progression": 43
+        },
+        "value": {
+            "crystals": 10
+        },
+        "category": [
+            "Betweenspace Crystals"
+        ]
+    },
+    {
+        "name": "5 Betweenspace crystals",
+        "classification_count": {
+            "filler": 14
+        },
+        "value": {
+            "crystals": 5
+        },
+        "category": [
+            "Betweenspace Crystals"
+        ]
+    },
+    {
+        "name": "3 Betweenspace crystals",
+        "classification_count": {
+            "filler": 12
+        },
+        "value": {
+            "crystals": 3
+        },
+        "category": [
+            "Betweenspace Crystals"
+        ]
+    },
+    {
+        "name": "Song - Acolyte",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Wavetapper",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - There",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - +ERABY+E CONNEC+10N",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - FULi AUTO SHOOTER",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Spell Diver",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - ENERGY SYNERGY MATRIX",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - G e n g a o z o",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - The 89's Momentum",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - GOODRAGE",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Crosshatch",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Chronomia",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Pictured as Perfect",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - BADSECRET",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Credits",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - â",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Tavgha",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Perfect ConfeCute!!",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - What You Love",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - septima",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - obair-ghreis",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - HTTPS",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Lost City",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Asymmetry (takehirotei remix)",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - FULi AUTO BUSTER",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - INFiNiTE ENERZY -Overdoze-",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Nhelv",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Random",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - F1055",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Doppelganger",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - hotline_ophiucus",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Luminaria",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Options",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Orphen",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - UTF-8000000000",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - BPM",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Fixations Toward the Stars",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Tormented World",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - LET THE CREATION BEGIN",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Signals Afar",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - QUASAR",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - APO11O",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - 3, 2, 1, Let's Go",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - The Last Page",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Farewell to Syzygia",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Dear My Endsummer",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Macropolis",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - -1",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - POISON GARDEN",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Singularity",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - energy trixxx",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Chronoexplorers",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Courage",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Prime",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Happy Go Lucky!!!",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Cyclical Rebellion",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - exterminate()",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Ops:Limone",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Yamai",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Revelation",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Angel's Window",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Octava",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - âNARCHIC LIGHT",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Candy@-Cracker",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - stardust",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Gauntlet",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - 3.1V.C1",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Seraphiel",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Spin Cycle (NETCAVY ReMiX)",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - The Next Arcady",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - tenpo pakala",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - execution_program",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - grode (Wyvren's Remix)",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Simulated Reality",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - safe_state (MANIAQ Sound Team Remix)",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - The Night of Fright",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - nullbreak",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - taffy",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - WATAGASHI RUSH",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Synthesizer Party",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Sternstunde",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - final farewell -aquaregia-",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - NONSENSE",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - CLAUDIA -estella-",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Stellaria",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Prismatic Vortex",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Arachnid",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - heptagramme",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Aleph-0",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - lost contact",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - grode(decoherence)",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Volition",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Showdown",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Nightshade",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - even at the end of the world, you left it",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - crack in the earth",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Stellar Sky",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Foolish Ambition",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Concrete Jungle",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - aria of ruinated winds",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Un-TECHNiCAL Reason",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - MYSTERIOUS TRIGGER",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Reboot",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - ULTiMâTUM",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - slic.hertz",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Crimson Dance (vivid/stasis Edit)",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Song - Beyond the Heart (Broken Heart Mix)",
+        "classification_count": {
+            "progression": 1
+        }
+    },
+    {
+        "name": "Powerup - Performance Gauge for 1 attempt",
+        "classification_count": {
+            "useful": 25
+        },
+        "category": [
+            "Powerups"
+        ]
+    },
+    {
+        "name": "Powerup - 2x Currency gain for 1 Song",
+        "classification_count": {
+            "useful": 15
+        },
+        "category": [
+            "Powerups"
+        ]
+    },
+    {
+        "name": "Trap - Ultimate Gauge next attempt (fail on miss)",
+        "classification_count": {
+            "trap": 20
+        },
+        "category": [
+            "Traps"
+        ]
+    },
+    {
+        "name": "Trap - Ultimate-X Gauge next attempt (fail on less than crit)",
+        "classification_count": {
+            "trap": 5
+        },
+        "category": [
+            "Traps"
+        ]
+    },
+    {
+        "name": "Trap - Scroll speed 1 next attempt",
+        "classification_count": {
+            "trap": 5
+        },
+        "category": [
+            "Traps"
+        ]
+    },
+    {
+        "name": "Trap - Mirrored lane input next attempt",
+        "classification_count": {
+            "trap": 5
+        },
+        "category": [
+            "Traps"
+        ]
+    },
+    {
+        "name": "Trap - Sacrifice a lane next attempt",
+        "classification_count": {
+            "trap": 3
+        },
+        "category": [
+            "Traps"
+        ]
+    }
+]

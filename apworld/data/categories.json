@@ -1,0 +1,26 @@
+{
+    "Betweenspace Crystals": {
+        "name": "Betweenspace Crystals",
+        "yaml_option": [
+            "Betweenspace Crystalsanity"
+        ]
+    },
+    "Song First Clears": {
+        "name": "Song First Clears",
+        "yaml_option": [
+            "Song First Clear Locations"
+        ]
+    },
+    "Song SS Rank Clears": {
+        "name": "Song SS Rank Clears"
+    },
+    "Core Items": {
+        "name": "Core Items"
+    },
+    "Powerups": {
+        "name": "Powerups"
+    },
+    "Traps": {
+        "name": "Traps"
+    }
+}
