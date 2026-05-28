@@ -59,9 +59,7 @@ for (var i = 0; i < array_length(data); ++i) {
 			})
 			
 			// this should be handled more gracefully as archipelago lets you retry Connect commands
-			network_destroy(global.ap_socket)
-			global.ap_socket = -1
-			global.ap_connected = false
+			ap_disconnect()
 		break;
 		case "RoomInfo":
 			// global._ap_roominfo_callback();

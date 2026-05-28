@@ -56,6 +56,15 @@ function ap_connect(address, port, name, password, callback) {
     })
 }
 
+function ap_disconnect() {
+    ap_debug("disconnecting!", "warn")
+    if(global.ap_socket != -1) {
+        network_destroy(global.ap_socket)
+    }
+    global.ap_socket = -1
+    global.ap_connected = false
+}
+
 function _ap_send(data) {
     if(!global.ap_connected) {
         ap_debug("queued command: " + data.cmd, "debug");
