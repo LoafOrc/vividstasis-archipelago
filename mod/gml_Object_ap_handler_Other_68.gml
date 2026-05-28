@@ -1,3 +1,23 @@
+var type = ds_map_find_value(async_load, "type")
+if(type == network_type_non_blocking_connect) {
+	var success = ds_map_find_value(async_load, "succeeded")
+
+	if(success > 0) {
+		ap_debug("connection established!")
+		global.ap_connected = true
+		_ap_send_arr(global.ap_message_preconnect_queue)
+		global.ap_message_preconnect_queue = []
+	} else {
+		ap_debug("failed to connect! success = " + string(success), "error")
+		global._ap_connection_callback({
+			success: false,
+			errors: ["ConnectFailed"]
+		})
+	}
+
+	exit;
+}
+
 var socket_id = ds_map_find_value(async_load, "id");
 if (socket_id != global.ap_socket) {
 	exit;
@@ -41,6 +61,10 @@ for (var i = 0; i < array_length(data); ++i) {
 			// this should be handled more gracefully as archipelago lets you retry Connect commands
 			network_destroy(global.ap_socket)
 			global.ap_socket = -1
+			global.ap_connected = false
+		break;
+		case "RoomInfo":
+			// global._ap_roominfo_callback();
 		break;
 		default:
 			ap_debug("unknown command: " + packet.cmd, "warn");

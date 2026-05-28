@@ -7,6 +7,7 @@ function ap_debug(msg, level = "info") {
 wss = network_socket_wss
 ws = network_socket_ws
 network_send_text = 2
+global.ap_message_preconnect_queue = []
 
 // address in most cases is archipelago.gg
 // password is usually empty
@@ -18,6 +19,7 @@ network_send_text = 2
 //   or "ConnectFailed"
 function ap_connect(address, port, name, password, callback) {
     ap_debug("trying to connect to " + address + ":" + string(port) + " as " + name)
+    global._ap_connection_callback = callback
 
     if(address == "archipelago.gg") {
         global.ap_socket = network_create_socket(wss) // secure
@@ -25,22 +27,16 @@ function ap_connect(address, port, name, password, callback) {
         global.ap_socket = network_create_socket(ws) // unsecure
     }
 
-    var isConnected = network_connect_raw(global.ap_socket, address, port)
+    var success = network_connect_raw_async(global.ap_socket, address, port)
 
-    /*
-    https://www.reddit.com/r/gamemaker/comments/50c0k1/network_connect_raw_only_returning_0/
-    ???
-    if(!isConnected) {
-        ap_debug("establishing connection failed!", "error")
+    if(success < 0) {
+        ap_debug("establishing connection failed! isConnected = " + string(isConnected), "error")
         callback({
             success: false,
             errors: ["ConnectFailed"]
         });
         return;
     }
-    */
-
-    global._ap_connection_callback = callback
 
     _ap_send({
         cmd: "Connect",
@@ -61,8 +57,17 @@ function ap_connect(address, port, name, password, callback) {
 }
 
 function _ap_send(data) {
+    if(!global.ap_connected) {
+        ap_debug("queued command: " + data.cmd, "debug");
+        array_push(global.ap_message_preconnect_queue, data);
+        return;
+    }
+
     ap_debug("sending command: " + data.cmd, "debug")
-    var arr = [data]
+    _ap_send_arr([data])
+}
+
+function _ap_send_arr(arr) {
     aa = json_stringify(arr)
 
     buffer = buffer_create(string_byte_length(aa), buffer_fixed,1)
