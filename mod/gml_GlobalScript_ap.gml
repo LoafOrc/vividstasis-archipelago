@@ -55,7 +55,8 @@ function ap_connect(address, port, name, password, callback) {
             major: int64(0),
             minor: int64(5),
             build : int64(1)
-        }
+        },
+        slot_data: true
     })
 }
 

@@ -7,6 +7,7 @@ network_send_text = 2
 
 global.secure = false
 global.ap_socket = -1
+global.ap_deathlink = false
 
 show_debug_log(true);
 ap_debug("initalizing")

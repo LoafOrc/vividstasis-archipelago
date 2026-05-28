@@ -22,10 +22,13 @@ for (var i = 0; i < array_length(data); ++i) {
 	// i'd much rather have some sort of map structure that conatins cmd -> callback
 	switch(packet.cmd) {
 		case "Connected":
+			global.ap_deathlink = packet.slot_data.death_link
 			ap_debug("Connection success!")
+			ap_debug("deathlink? " + string(global.ap_deathlink), "debug")
 			global._ap_connection_callback({
 				success: true
 			})
+			
 			
 		break;
 		case "ConnectionRefused":
