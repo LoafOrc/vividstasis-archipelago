@@ -42,7 +42,7 @@ for (var i = 0; i < array_length(data); ++i) {
 	// i'd much rather have some sort of map structure that conatins cmd -> callback
 	switch(packet.cmd) {
 		case "Connected":
-			global.ap_deathlink = packet.slot_data.death_link
+			// global.ap_deathlink = packet.slot_data.death_link
 			ap_debug("Connection success!")
 			ap_debug("deathlink? " + string(global.ap_deathlink), "debug")
 			global._ap_connection_callback({
@@ -63,6 +63,12 @@ for (var i = 0; i < array_length(data); ++i) {
 		break;
 		case "RoomInfo":
 			// global._ap_roominfo_callback();
+		break;
+		case "ReceivedItems":
+			array_foreach(packet.items, function(item) {
+				ini_open(global.profile_file)
+				ini_write_real("ap", "item_" + string(item.item), true)
+			})
 		break;
 		default:
 			ap_debug("unknown command: " + packet.cmd, "warn");

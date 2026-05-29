@@ -1,0 +1,813 @@
+{
+    "tutorial": {
+        "song_item_id": 1,
+        "ss_rank_location_id": 2
+    },
+    "acolyte": {
+        "song_item_id": 3,
+        "ss_rank_location_id": 4
+    },
+    "wavetapper": {
+        "song_item_id": 5,
+        "ss_rank_location_id": 6
+    },
+    "there": {
+        "song_item_id": 7,
+        "ss_rank_location_id": 8
+    },
+    "terabyte": {
+        "song_item_id": 9,
+        "ss_rank_location_id": 10
+    },
+    "fuli": {
+        "song_item_id": 11,
+        "ss_rank_location_id": 12
+    },
+    "spelldiver": {
+        "song_item_id": 13,
+        "ss_rank_location_id": 14
+    },
+    "esm": {
+        "song_item_id": 15,
+        "ss_rank_location_id": 16
+    },
+    "gengaozo": {
+        "song_item_id": 17,
+        "ss_rank_location_id": 18
+    },
+    "89momentum": {
+        "song_item_id": 19,
+        "ss_rank_location_id": 20
+    },
+    "goodrage": {
+        "song_item_id": 21,
+        "ss_rank_location_id": 22
+    },
+    "crosshatch": {
+        "song_item_id": 23,
+        "ss_rank_location_id": 24
+    },
+    "chronomia": {
+        "song_item_id": 25,
+        "ss_rank_location_id": 26
+    },
+    "pictured": {
+        "song_item_id": 27,
+        "ss_rank_location_id": 28
+    },
+    "badsecret": {
+        "song_item_id": 29,
+        "ss_rank_location_id": 30
+    },
+    "credits": {
+        "song_item_id": 31,
+        "ss_rank_location_id": 32
+    },
+    "avalon": {
+        "song_item_id": 33,
+        "ss_rank_location_id": 34
+    },
+    "tavgha": {
+        "song_item_id": 35,
+        "ss_rank_location_id": 36
+    },
+    "confecute": {
+        "song_item_id": 37,
+        "ss_rank_location_id": 38
+    },
+    "whatyoulove": {
+        "song_item_id": 39,
+        "ss_rank_location_id": 40
+    },
+    "pyromania": {
+        "song_item_id": 41,
+        "ss_rank_location_id": 42
+    },
+    "septima": {
+        "song_item_id": 43,
+        "ss_rank_location_id": 44
+    },
+    "obair": {
+        "song_item_id": 45,
+        "ss_rank_location_id": 46
+    },
+    "https": {
+        "song_item_id": 47,
+        "ss_rank_location_id": 48
+    },
+    "lostcity": {
+        "song_item_id": 49,
+        "ss_rank_location_id": 50
+    },
+    "asymmetry": {
+        "song_item_id": 51,
+        "ss_rank_location_id": 52
+    },
+    "fulibuster": {
+        "song_item_id": 53,
+        "ss_rank_location_id": 54
+    },
+    "collab_prp": {
+        "song_item_id": 55,
+        "ss_rank_location_id": 56
+    },
+    "infiniteenergy": {
+        "song_item_id": 57,
+        "ss_rank_location_id": 58
+    },
+    "nhelv": {
+        "song_item_id": 59,
+        "ss_rank_location_id": 60
+    },
+    "random": {
+        "song_item_id": 61,
+        "ss_rank_location_id": 62
+    },
+    "f1055": {
+        "song_item_id": 63,
+        "ss_rank_location_id": 64
+    },
+    "doppelganger": {
+        "song_item_id": 65,
+        "ss_rank_location_id": 66
+    },
+    "hotline": {
+        "song_item_id": 67,
+        "ss_rank_location_id": 68
+    },
+    "luminaria": {
+        "song_item_id": 69,
+        "ss_rank_location_id": 70
+    },
+    "options": {
+        "song_item_id": 71,
+        "ss_rank_location_id": 72
+    },
+    "orphen": {
+        "song_item_id": 73,
+        "ss_rank_location_id": 74
+    },
+    "utf": {
+        "song_item_id": 75,
+        "ss_rank_location_id": 76
+    },
+    "bpm": {
+        "song_item_id": 77,
+        "ss_rank_location_id": 78
+    },
+    "fixations": {
+        "song_item_id": 79,
+        "ss_rank_location_id": 80
+    },
+    "tormented": {
+        "song_item_id": 81,
+        "ss_rank_location_id": 82
+    },
+    "creation": {
+        "song_item_id": 83,
+        "ss_rank_location_id": 84
+    },
+    "grode": {
+        "ss_rank_location_id": 85
+    },
+    "signals": {
+        "song_item_id": 86,
+        "ss_rank_location_id": 87
+    },
+    "quasar": {
+        "song_item_id": 88,
+        "ss_rank_location_id": 89
+    },
+    "apollo": {
+        "song_item_id": 90,
+        "ss_rank_location_id": 91
+    },
+    "321": {
+        "song_item_id": 92,
+        "ss_rank_location_id": 93
+    },
+    "lastpage": {
+        "song_item_id": 94,
+        "ss_rank_location_id": 95
+    },
+    "farewell": {
+        "song_item_id": 96,
+        "ss_rank_location_id": 97
+    },
+    "endsummer": {
+        "song_item_id": 98,
+        "ss_rank_location_id": 99
+    },
+    "macro": {
+        "song_item_id": 100,
+        "ss_rank_location_id": 101
+    },
+    "minus1": {
+        "song_item_id": 102,
+        "ss_rank_location_id": 103
+    },
+    "poisongarden": {
+        "song_item_id": 104,
+        "ss_rank_location_id": 105
+    },
+    "singularity": {
+        "song_item_id": 106,
+        "ss_rank_location_id": 107
+    },
+    "energy": {
+        "song_item_id": 108,
+        "ss_rank_location_id": 109
+    },
+    "chrono": {
+        "song_item_id": 110,
+        "ss_rank_location_id": 111
+    },
+    "courage": {
+        "song_item_id": 112,
+        "ss_rank_location_id": 113
+    },
+    "cosmo": {
+        "song_item_id": 114,
+        "ss_rank_location_id": 115
+    },
+    "unraveling": {
+        "song_item_id": 116,
+        "ss_rank_location_id": 117
+    },
+    "prime": {
+        "song_item_id": 118,
+        "ss_rank_location_id": 119
+    },
+    "happygo": {
+        "song_item_id": 120,
+        "ss_rank_location_id": 121
+    },
+    "cyclical": {
+        "song_item_id": 122,
+        "ss_rank_location_id": 123
+    },
+    "exterminate": {
+        "song_item_id": 124,
+        "ss_rank_location_id": 125
+    },
+    "valor": {
+        "song_item_id": 126,
+        "ss_rank_location_id": 127
+    },
+    "opslimone": {
+        "song_item_id": 128,
+        "ss_rank_location_id": 129
+    },
+    "yamai": {
+        "song_item_id": 130,
+        "ss_rank_location_id": 131
+    },
+    "revelation": {
+        "song_item_id": 132,
+        "ss_rank_location_id": 133
+    },
+    "angelswindow": {
+        "song_item_id": 134,
+        "ss_rank_location_id": 135
+    },
+    "octava": {
+        "song_item_id": 136,
+        "ss_rank_location_id": 137
+    },
+    "anarchic": {
+        "song_item_id": 138,
+        "ss_rank_location_id": 139
+    },
+    "candy": {
+        "song_item_id": 140,
+        "ss_rank_location_id": 141
+    },
+    "stardust": {
+        "song_item_id": 142,
+        "ss_rank_location_id": 143
+    },
+    "gauntlet": {
+        "song_item_id": 144,
+        "ss_rank_location_id": 145
+    },
+    "31vc1": {
+        "song_item_id": 146,
+        "ss_rank_location_id": 147
+    },
+    "ione": {
+        "song_item_id": 148,
+        "ss_rank_location_id": 149
+    },
+    "seraphiel": {
+        "song_item_id": 150,
+        "ss_rank_location_id": 151
+    },
+    "spincycle": {
+        "song_item_id": 152,
+        "ss_rank_location_id": 153
+    },
+    "arcady": {
+        "song_item_id": 154,
+        "ss_rank_location_id": 155
+    },
+    "tenpo": {
+        "song_item_id": 156,
+        "ss_rank_location_id": 157
+    },
+    "collab_time": {
+        "song_item_id": 158,
+        "ss_rank_location_id": 159
+    },
+    "collab_gormx": {
+        "song_item_id": 160,
+        "ss_rank_location_id": 161
+    },
+    "execution": {
+        "song_item_id": 162,
+        "ss_rank_location_id": 163
+    },
+    "grodermx": {
+        "song_item_id": 164,
+        "ss_rank_location_id": 165
+    },
+    "astellion": {
+        "song_item_id": 166,
+        "ss_rank_location_id": 167
+    },
+    "marenol": {
+        "song_item_id": 168,
+        "ss_rank_location_id": 169
+    },
+    "simulated": {
+        "song_item_id": 170,
+        "ss_rank_location_id": 171
+    },
+    "safestate": {
+        "song_item_id": 172,
+        "ss_rank_location_id": 173
+    },
+    "supernova": {
+        "song_item_id": 174,
+        "ss_rank_location_id": 175
+    },
+    "nightfright": {
+        "song_item_id": 176,
+        "ss_rank_location_id": 177
+    },
+    "nullbreak": {
+        "song_item_id": 178,
+        "ss_rank_location_id": 179
+    },
+    "solomon": {
+        "song_item_id": 180,
+        "ss_rank_location_id": 181
+    },
+    "ua": {
+        "song_item_id": 182,
+        "ss_rank_location_id": 183
+    },
+    "taffy": {
+        "song_item_id": 184,
+        "ss_rank_location_id": 185
+    },
+    "rush": {
+        "song_item_id": 186,
+        "ss_rank_location_id": 187
+    },
+    "collab_worn": {
+        "song_item_id": 188,
+        "ss_rank_location_id": 189
+    },
+    "attractor": {
+        "song_item_id": 190,
+        "ss_rank_location_id": 191
+    },
+    "synthesizerparty": {
+        "song_item_id": 192,
+        "ss_rank_location_id": 193
+    },
+    "sternstunde": {
+        "song_item_id": 194,
+        "ss_rank_location_id": 195
+    },
+    "aquaregia": {
+        "song_item_id": 196,
+        "ss_rank_location_id": 197
+    },
+    "voltage": {
+        "song_item_id": 198,
+        "ss_rank_location_id": 199
+    },
+    "party": {
+        "song_item_id": 200,
+        "ss_rank_location_id": 201
+    },
+    "nonsense": {
+        "song_item_id": 202,
+        "ss_rank_location_id": 203
+    },
+    "claudia": {
+        "song_item_id": 204,
+        "ss_rank_location_id": 205
+    },
+    "calypso": {
+        "song_item_id": 206,
+        "ss_rank_location_id": 207
+    },
+    "stargazers": {
+        "song_item_id": 208,
+        "ss_rank_location_id": 209
+    },
+    "stopmotion": {
+        "song_item_id": 210,
+        "ss_rank_location_id": 211
+    },
+    "stellaria": {
+        "song_item_id": 212,
+        "ss_rank_location_id": 213
+    },
+    "collab_trip": {
+        "song_item_id": 214,
+        "ss_rank_location_id": 215
+    },
+    "collab_ult": {
+        "song_item_id": 216,
+        "ss_rank_location_id": 217
+    },
+    "collab_garden": {
+        "song_item_id": 218,
+        "ss_rank_location_id": 219
+    },
+    "collab_lumen": {
+        "song_item_id": 220,
+        "ss_rank_location_id": 221
+    },
+    "collab_san": {
+        "song_item_id": 222,
+        "ss_rank_location_id": 223
+    },
+    "collab_punch": {
+        "song_item_id": 224,
+        "ss_rank_location_id": 225
+    },
+    "collab_city": {
+        "song_item_id": 226,
+        "ss_rank_location_id": 227
+    },
+    "collab_real": {
+        "song_item_id": 228,
+        "ss_rank_location_id": 229
+    },
+    "shatteredsky": {
+        "song_item_id": 230,
+        "ss_rank_location_id": 231
+    },
+    "prismatic": {
+        "song_item_id": 232,
+        "ss_rank_location_id": 233
+    },
+    "apocalypse": {
+        "song_item_id": 234,
+        "ss_rank_location_id": 235
+    },
+    "xn": {
+        "song_item_id": 236,
+        "ss_rank_location_id": 237
+    },
+    "seeyoumove": {
+        "song_item_id": 238,
+        "ss_rank_location_id": 239
+    },
+    "moreicarry": {
+        "song_item_id": 240,
+        "ss_rank_location_id": 241
+    },
+    "surtr": {
+        "song_item_id": 242,
+        "ss_rank_location_id": 243
+    },
+    "heptagramme": {
+        "song_item_id": 244,
+        "ss_rank_location_id": 245
+    },
+    "self": {
+        "song_item_id": 246,
+        "ss_rank_location_id": 247
+    },
+    "convergence": {
+        "song_item_id": 248,
+        "ss_rank_location_id": 249
+    },
+    "isthisit": {
+        "song_item_id": 250,
+        "ss_rank_location_id": 251
+    },
+    "lastwish": {
+        "song_item_id": 252,
+        "ss_rank_location_id": 253
+    },
+    "aleph": {
+        "song_item_id": 254,
+        "ss_rank_location_id": 255
+    },
+    "starcrashers": {
+        "song_item_id": 256,
+        "ss_rank_location_id": 257
+    },
+    "plaudite": {
+        "song_item_id": 258,
+        "ss_rank_location_id": 259
+    },
+    "libertia": {
+        "song_item_id": 260,
+        "ss_rank_location_id": 261
+    },
+    "nulctrl": {
+        "song_item_id": 262,
+        "ss_rank_location_id": 263
+    },
+    "dragon": {
+        "song_item_id": 264,
+        "ss_rank_location_id": 265
+    },
+    "collab_multi": {
+        "song_item_id": 266,
+        "ss_rank_location_id": 267
+    },
+    "collab_image": {
+        "song_item_id": 268,
+        "ss_rank_location_id": 269
+    },
+    "firstbreath": {
+        "song_item_id": 270,
+        "ss_rank_location_id": 271
+    },
+    "synthesis": {
+        "song_item_id": 272,
+        "ss_rank_location_id": 273
+    },
+    "lostconnection": {
+        "song_item_id": 274,
+        "ss_rank_location_id": 275
+    },
+    "collab_body": {
+        "song_item_id": 276,
+        "ss_rank_location_id": 277
+    },
+    "collab_secil": {
+        "song_item_id": 278,
+        "ss_rank_location_id": 279
+    },
+    "collab_battle": {
+        "song_item_id": 280,
+        "ss_rank_location_id": 281
+    },
+    "collab_star": {
+        "song_item_id": 282,
+        "ss_rank_location_id": 283
+    },
+    "grodefrums": {
+        "song_item_id": 284,
+        "ss_rank_location_id": 285
+    },
+    "vol": {
+        "song_item_id": 286,
+        "ss_rank_location_id": 287
+    },
+    "tiebreaker1": {
+        "song_item_id": 288,
+        "ss_rank_location_id": 289
+    },
+    "c3c": {
+        "song_item_id": 290,
+        "ss_rank_location_id": 291
+    },
+    "domain": {
+        "song_item_id": 292,
+        "ss_rank_location_id": 293
+    },
+    "psy": {
+        "song_item_id": 294,
+        "ss_rank_location_id": 295
+    },
+    "showdown": {
+        "song_item_id": 296,
+        "ss_rank_location_id": 297
+    },
+    "nightshade": {
+        "song_item_id": 298,
+        "ss_rank_location_id": 299
+    },
+    "attheend": {
+        "song_item_id": 300,
+        "ss_rank_location_id": 301
+    },
+    "crack": {
+        "song_item_id": 302,
+        "ss_rank_location_id": 303
+    },
+    "soyoufelt": {
+        "song_item_id": 304,
+        "ss_rank_location_id": 305
+    },
+    "trail": {
+        "song_item_id": 306,
+        "ss_rank_location_id": 307
+    },
+    "sky": {
+        "song_item_id": 308,
+        "ss_rank_location_id": 309
+    },
+    "foolish": {
+        "song_item_id": 310,
+        "ss_rank_location_id": 311
+    },
+    "collab_dreams": {
+        "song_item_id": 312,
+        "ss_rank_location_id": 313
+    },
+    "collab_et": {
+        "song_item_id": 314,
+        "ss_rank_location_id": 315
+    },
+    "collab_ign": {
+        "song_item_id": 316,
+        "ss_rank_location_id": 317
+    },
+    "collab_night": {
+        "song_item_id": 318,
+        "ss_rank_location_id": 319
+    },
+    "collab_wave": {
+        "song_item_id": 320,
+        "ss_rank_location_id": 321
+    },
+    "collab_8boss1": {
+        "song_item_id": 322,
+        "ss_rank_location_id": 323
+    },
+    "collab_8boss2": {
+        "song_item_id": 324,
+        "ss_rank_location_id": 325
+    },
+    "bloom": {
+        "song_item_id": 326,
+        "ss_rank_location_id": 327
+    },
+    "pygmalion": {
+        "song_item_id": 328,
+        "ss_rank_location_id": 329
+    },
+    "concrete": {
+        "song_item_id": 330,
+        "ss_rank_location_id": 331
+    },
+    "ruinatedwinds": {
+        "song_item_id": 332,
+        "ss_rank_location_id": 333
+    },
+    "untechnical": {
+        "song_item_id": 334,
+        "ss_rank_location_id": 335
+    },
+    "refract": {
+        "song_item_id": 336,
+        "ss_rank_location_id": 337
+    },
+    "mysterious": {
+        "song_item_id": 338,
+        "ss_rank_location_id": 339
+    },
+    "idealized": {
+        "song_item_id": 340,
+        "ss_rank_location_id": 341
+    },
+    "bardess": {
+        "song_item_id": 342,
+        "ss_rank_location_id": 343
+    },
+    "ephemeral": {
+        "song_item_id": 344,
+        "ss_rank_location_id": 345
+    },
+    "reboot": {
+        "song_item_id": 346,
+        "ss_rank_location_id": 347
+    },
+    "ultimatum": {
+        "song_item_id": 348,
+        "ss_rank_location_id": 349
+    },
+    "sentinel": {
+        "song_item_id": 350,
+        "ss_rank_location_id": 351
+    },
+    "slic": {
+        "song_item_id": 352,
+        "ss_rank_location_id": 353
+    },
+    "crimson": {
+        "song_item_id": 354,
+        "ss_rank_location_id": 355
+    },
+    "brokenheart": {
+        "song_item_id": 356,
+        "ss_rank_location_id": 357
+    },
+    "collab_7boss": {
+        "song_item_id": 358,
+        "ss_rank_location_id": 359
+    },
+    "collab_novena": {
+        "song_item_id": 360,
+        "ss_rank_location_id": 361
+    },
+    "rise": {
+        "song_item_id": 362,
+        "ss_rank_location_id": 363
+    },
+    "t": {
+        "song_item_id": 364,
+        "ss_rank_location_id": 365
+    },
+    "smots": {
+        "song_item_id": 366,
+        "ss_rank_location_id": 367
+    },
+    "endless": {
+        "song_item_id": 368,
+        "ss_rank_location_id": 369
+    },
+    "wolv": {
+        "song_item_id": 370,
+        "ss_rank_location_id": 371
+    },
+    "zylph": {
+        "song_item_id": 372,
+        "ss_rank_location_id": 373
+    },
+    "eva": {
+        "song_item_id": 374,
+        "ss_rank_location_id": 375
+    },
+    "rena": {
+        "song_item_id": 376,
+        "ss_rank_location_id": 377
+    },
+    "collab_25c1": {
+        "song_item_id": 378,
+        "ss_rank_location_id": 379
+    },
+    "collab_soma2": {
+        "song_item_id": 380,
+        "ss_rank_location_id": 381
+    },
+    "collab_soma1": {
+        "song_item_id": 382,
+        "ss_rank_location_id": 383
+    },
+    "cd": {
+        "song_item_id": 384,
+        "ss_rank_location_id": 385
+    },
+    "collab_precious": {
+        "song_item_id": 386,
+        "ss_rank_location_id": 387
+    },
+    "collab_until": {
+        "song_item_id": 388,
+        "ss_rank_location_id": 389
+    },
+    "collab_loop": {
+        "song_item_id": 390,
+        "ss_rank_location_id": 391
+    },
+    "n7": {
+        "song_item_id": 392,
+        "ss_rank_location_id": 393
+    },
+    "n1": {
+        "song_item_id": 394,
+        "ss_rank_location_id": 395
+    },
+    "n2": {
+        "song_item_id": 396,
+        "ss_rank_location_id": 397
+    },
+    "n3": {
+        "song_item_id": 398,
+        "ss_rank_location_id": 399
+    },
+    "n4": {
+        "song_item_id": 400,
+        "ss_rank_location_id": 401
+    },
+    "eo": {
+        "song_item_id": 402,
+        "ss_rank_location_id": 403
+    },
+    "n6": {
+        "song_item_id": 404,
+        "ss_rank_location_id": 405
+    }
+}

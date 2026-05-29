@@ -65,6 +65,10 @@ function ap_disconnect() {
     global.ap_connected = false
 }
 
+function ap_check(location_id) {
+    
+}
+
 function _ap_send(data) {
     if(!global.ap_connected) {
         ap_debug("queued command: " + data.cmd, "debug");
