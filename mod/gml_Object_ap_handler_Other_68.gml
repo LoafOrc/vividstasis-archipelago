@@ -68,6 +68,7 @@ for (var i = 0; i < array_length(data); ++i) {
 			array_foreach(packet.items, function(item) {
 				ini_open(global.profile_file)
 				ini_write_real("ap", "item_" + string(item.item), true)
+				ini_close()
 			})
 		break;
 		default:

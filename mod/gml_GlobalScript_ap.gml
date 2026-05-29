@@ -8,6 +8,7 @@ wss = network_socket_wss
 ws = network_socket_ws
 network_send_text = 2
 global.ap_message_preconnect_queue = []
+global.ap_unsent_location_checks = []
 
 // address in most cases is archipelago.gg
 // password is usually empty
@@ -66,7 +67,20 @@ function ap_disconnect() {
 }
 
 function ap_check(location_id) {
-    
+    if(!global.ap_connected) {
+        ap_debug("is disconnected! storing location check to try again when we reconnect");
+        array_push(global.ap_unsent_location_checks, location_id);
+        // vivid/stasis specific
+        ini_open(global.profile_file);
+        ini_write_string("ap", "unsent_locations", string_join_ext(",", global.ap_unsent_location_checks));
+        ini_close();
+        return;
+    }
+
+    _ap_send({
+        cmd: "LocationChecks",
+        locations: [location_id]
+    })
 }
 
 function _ap_send(data) {

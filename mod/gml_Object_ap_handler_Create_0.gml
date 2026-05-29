@@ -30,6 +30,29 @@ ap_connect("localhost", 38281, "bongo", "", function(result) {
         // result.errors
     }
 
+    ini_open(global.profile_file)
+    var unsent_checks = ini_read_string("ap", "unsent_locations", "");
+    
+    if (string_length(unsent_checks) > 0)
+    {
+        var checks_split = split_string(",", unsent_checks, true);
+        var locations = []
+
+        for (var i = 0; i < array_length(checks_split); i++)
+        {
+            var s = real(checks_split[i]);
+            array_push(locations, s)
+        }
+        
+        _ap_send({
+            cmd: "LocationChecks",
+            locations: locations
+        })
+        ini_write_string("ap", "unsent_locations", "")
+    }
+
+    ini_close()
+
     for (var i = 0; i < array_length(global.song_list); i++) {
         var song = global.song_list[i];
         var apData = struct_get(global.ap_data, song.chart_id)
@@ -39,10 +62,15 @@ ap_connect("localhost", 38281, "bongo", "", function(result) {
             continue
         }
 
+        song.ap = { 
+            ss_rank_clear_locid: apData.ss_rank_location_id
+        }
+
         if(!struct_exists(apData, "song_item_id")) {
             continue
         }
 
+        song.ap.song_item_id = apData.song_item_id
         song.unlock = {
             type: 1,
             section: "ap",
