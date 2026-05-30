@@ -1,9 +1,4 @@
-{
-    "tutorial": {
-        "song_name": "Tutorial",
-        "ss_rank_location_id": 1,
-        "song_item_id": 2
-    },
+﻿SONGS = {
     "acolyte": {
         "song_name": "Acolyte",
         "ss_rank_location_id": 3,
