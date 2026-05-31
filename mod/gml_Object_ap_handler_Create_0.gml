@@ -79,7 +79,7 @@ ap_connect("localhost", 38281, "bongo", "", function(result) {
             per_difficulty: false,
             hidden: false,
             enc_type: 0,
-            enc_hint: ""
+            enc_hint: "Unlock from Archipelago"
         }
     }
 })

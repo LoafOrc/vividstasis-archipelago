@@ -45,7 +45,7 @@ function ap_connect(address, port, name, password, callback) {
         game: "vivid/stasis",
         name: name,
         uuid: int64(999999),
-        items_handling: int64(3), // this is 0b011: https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/network%20protocol.md#items_handling-flags
+        items_handling: int64(4 + 2 + 1), // 0b111, https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/network%20protocol.md#items_handling-flags
         tags: [],
         version: { // archipelago version
             class: "Version",
