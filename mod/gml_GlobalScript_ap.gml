@@ -6,9 +6,12 @@ function ap_debug(msg, level = "info") {
 
 wss = network_socket_wss
 ws = network_socket_ws
-network_send_text = 2
+global.network_send_text = 2
 global.ap_message_preconnect_queue = []
-global.ap_unsent_location_checks = []
+global.ap_location_checks = []
+global.ap_location_scouts = {}
+global.ap_slotinfo = {}
+global.ap_gamedata = {}
 
 // address in most cases is archipelago.gg
 // password is usually empty
@@ -44,7 +47,7 @@ function ap_connect(address, port, name, password, callback) {
         password: password,
         game: "vivid/stasis",
         name: name,
-        uuid: int64(999999),
+        uuid: int64(69420),
         items_handling: int64(4 + 2 + 1), // 0b111, https://github.com/ArchipelagoMW/Archipelago/blob/main/docs/network%20protocol.md#items_handling-flags
         tags: [],
         version: { // archipelago version
@@ -66,20 +69,34 @@ function ap_disconnect() {
     global.ap_connected = false
 }
 
+function ap_struct_get_values() {
+
+}
+
 function ap_check(location_id) {
+    // vivid/stasis specific
+    // write to save to be able to recover from later
+    ini_open(global.profile_file);
+    array_push(global.ap_location_checks, location_id);
+    ini_write_string("ap", "all_locations", string_join_ext(",", global.ap_location_checks));
+    ini_close();
+
     if(!global.ap_connected) {
         ap_debug("is disconnected! storing location check to try again when we reconnect");
-        array_push(global.ap_unsent_location_checks, location_id);
-        // vivid/stasis specific
-        ini_open(global.profile_file);
-        ini_write_string("ap", "unsent_locations", string_join_ext(",", global.ap_unsent_location_checks));
-        ini_close();
+        
         return;
     }
 
     _ap_send({
         cmd: "LocationChecks",
         locations: [location_id]
+    })
+}
+
+function ap_scout(location_ids) {
+    _ap_send({
+        cmd: "LocationScouts",
+        locations: location_ids
     })
 }
 
@@ -101,5 +118,5 @@ function _ap_send_arr(arr) {
     buffer_seek(buffer, buffer_seek_start, 0)
     buffer_write(buffer,buffer_text,aa)
 
-    network_send_raw(global.ap_socket, buffer, buffer_tell(buffer), network_send_text)
+    network_send_raw(global.ap_socket, buffer, buffer_tell(buffer), global.network_send_text)
 }

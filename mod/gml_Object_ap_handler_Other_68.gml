@@ -18,6 +18,20 @@ if(type == network_type_non_blocking_connect) {
 	exit;
 }
 
+function debug_save_json(data, file_name) {
+	var _buffer_size = string_byte_length(json_stringify(data, true)) + 1;
+		var _save_buffer = buffer_create(_buffer_size, buffer_fixed, 1);
+
+		// 3. Write the string data into the buffer
+		buffer_write(_save_buffer, buffer_string, json_stringify(data, true));
+
+		// 4. Save the buffer contents to a file disk
+		buffer_save(_save_buffer, file_name + ".json");
+
+		// 5. Delete the buffer from memory to prevent memory leaks
+		buffer_delete(_save_buffer);
+}
+
 var socket_id = ds_map_find_value(async_load, "id");
 if (socket_id != global.ap_socket) {
 	exit;
@@ -45,11 +59,11 @@ for (var i = 0; i < array_length(data); ++i) {
 			// global.ap_deathlink = packet.slot_data.death_link
 			ap_debug("Connection success!")
 			ap_debug("deathlink? " + string(global.ap_deathlink), "debug")
+			global.ap_slotinfo = packet.slot_info
+			debug_save_json(global.ap_slotinfo, "ap_slotinfo")
 			global._ap_connection_callback({
 				success: true
 			})
-			
-			
 		break;
 		case "ConnectionRefused":
 			ap_debug("Connection failed: " + string_join_ext(", ", packet.errors))
@@ -63,6 +77,10 @@ for (var i = 0; i < array_length(data); ++i) {
 		break;
 		case "RoomInfo":
 			// global._ap_roominfo_callback();
+			global._ap_send({
+				cmd: "GetDataPackage",
+				games: ["vivid/stasis"]
+			})
 		break;
 		case "ReceivedItems":
 			array_foreach(packet.items, function(item) {
@@ -71,7 +89,53 @@ for (var i = 0; i < array_length(data); ++i) {
 				ini_close()
 			})
 		break;
+		case "LocationInfo":
+			debug_save_json(packet, "locationinfo")
+			array_foreach(packet.locations, function(loc) {
+				var _slot_info = struct_get(global.ap_slotinfo, string(loc.player))
+				var _item_name = struct_get(struct_get(global.ap_gamedata, _slot_info.game).item_id_to_name, string(loc.item))
+				var scout = {
+					item_id: loc.item,
+					player: loc.player,
+					name: _slot_info.name + "'s " + _item_name
+				}
+				struct_set(global.ap_location_scouts, string(loc.location), scout)
+				ap_debug("got scout info for: " + string(loc.player) + " " + string(loc.item) + " " + string(loc.location) + " " + scout.name)
+				debug_save_json(scout, "locationinfo_" + string(loc.location))
+			})
+			
+		break;
+			case "DataPackage":
+				var _keys = variable_struct_get_names(packet.data.games);
+			var _size = array_length(_keys);
+
+			for (var i = 0; i < _size; ++i) {
+				var _key = _keys[i];
+				var _value = struct_get(packet.data.games, _key);
+				var gamedata = {
+					item_id_to_name: { }
+				}
+				
+				
+				ap_debug("Game: " + _key + "");
+				var item_name_to_id = struct_get(_value, "item_name_to_id");
+				var item_names = variable_struct_get_names(item_name_to_id);
+				var item_count = array_length(item_names)
+				for(var j = 0; j < item_count; ++j) {
+					var item_name = item_names[j]
+					var item_id = struct_get(item_name_to_id, item_name)
+					ap_debug(string(item_id) + " = " + item_name);
+					struct_set(gamedata.item_id_to_name, string(item_id), item_name)
+				}
+
+				struct_set(global.ap_gamedata, _key, gamedata)
+			}
+
+			debug_save_json(global.ap_gamedata, "ap_gamedata")
+			ap_debug("data package")
+		break;
 		default:
-			ap_debug("unknown command: " + packet.cmd, "warn");
+			ap_debug("unknown command: " + json_stringify(packet), "warn");
+			debug_save_json(packet, "unknown_" + packet.cmd)
 	}
 }

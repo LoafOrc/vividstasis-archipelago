@@ -5,13 +5,16 @@ wss = network_socket_wss
 ws = network_socket_ws
 network_send_text = 2
 
-var _filename = "ap.json";
-var _buffer = buffer_load(_filename);
+function load_json_from_file(_filename) {
+    var _buffer = buffer_load(_filename);
 
-var _json_string = buffer_read(_buffer, buffer_string);
-buffer_delete(_buffer);
+    var _json_string = buffer_read(_buffer, buffer_string);
+    buffer_delete(_buffer);
+    return json_parse(_json_string)
+}
 
-global.ap_data = json_parse(_json_string);
+global.ap_data = load_json_from_file("ap.json");
+global.ap_bsdata = load_json_from_file("ap_bs_flat.json");
 
 global.secure = false
 global.ap_socket = -1
@@ -28,30 +31,28 @@ ap_connect("localhost", 38281, "bongo", "", function(result) {
     } else {
         // show error message ui to player
         // result.errors
+        return;
     }
 
     ini_open(global.profile_file)
-    var unsent_checks = ini_read_string("ap", "unsent_locations", "");
+    var prev_checks = ini_read_string("ap", "all_locations", "");
+    ini_close()
     
-    if (string_length(unsent_checks) > 0)
+    if (string_length(prev_checks) > 0)
     {
-        var checks_split = split_string(",", unsent_checks, true);
-        var locations = []
+        var checks_split = split_string(",", prev_checks, true);
 
         for (var i = 0; i < array_length(checks_split); i++)
         {
             var s = real(checks_split[i]);
-            array_push(locations, s)
+            array_push(global.ap_location_checks, s)
         }
         
         _ap_send({
             cmd: "LocationChecks",
-            locations: locations
+            locations: global.ap_location_checks
         })
-        ini_write_string("ap", "unsent_locations", "")
     }
-
-    ini_close()
 
     for (var i = 0; i < array_length(global.song_list); i++) {
         var song = global.song_list[i];
@@ -82,4 +83,16 @@ ap_connect("localhost", 38281, "bongo", "", function(result) {
             enc_hint: "Unlock from Archipelago"
         }
     }
+
+
+    var _keys = struct_get_names(global.ap_bsdata);
+    var _count = array_length(_keys);
+    
+    var _values = array_create(_count);
+    
+    for (var i = 0; i < _count; i++) {
+        _values[i] = int64(struct_get(global.ap_bsdata, _keys[i]));
+    }
+
+    ap_scout(_values)
 })
