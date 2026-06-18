@@ -12,6 +12,10 @@ global.ap_location_checks = []
 global.ap_location_scouts = {}
 global.ap_slotinfo = {}
 global.ap_gamedata = {}
+global.ap_self = {}
+global.ap_slot = -1
+global.ap_callbacks = {}
+global.ap_deathlink_primed = true
 
 // address in most cases is archipelago.gg
 // password is usually empty
@@ -71,6 +75,27 @@ function ap_disconnect() {
 
 function ap_struct_get_values() {
 
+}
+
+
+
+function ap_send_deathlink(reason) {
+    if(!global.ap_deathlink_primed) {
+        return;
+    }
+    var _player_name = struct_get(global.ap_slotinfo, string(global.ap_slot)).name
+    _ap_send({
+        cmd: "Bounce",
+        tags: ["DeathLink"],
+        slots: [],
+        games: [],
+        data: {
+            time: unix_timestamp() + 10,
+            cause: string_replace(reason, "<player>", _player_name),
+            source: _player_name
+        }
+    })
+    global.ap_deathlink_primed = false
 }
 
 function ap_check(location_id) {

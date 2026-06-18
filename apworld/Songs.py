@@ -206,6 +206,7 @@
     },
     "grode": {
         "song_name": "grode",
+        "song_item_id": 701, # random value
         "ss_rank_location_id": 85
     },
     "signals": {

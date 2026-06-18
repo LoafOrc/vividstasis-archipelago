@@ -1,0 +1,100 @@
+﻿HUB = {
+    "gem_20": 468,
+    "song_lostcity": 469,
+    "log_hub2": 470
+}
+
+PROOF_OF_SOUL = {
+    "song_execution": 471,
+    "log_final": 472,
+    "proof_of_soul": 700 # some random value because im too lazy :p
+}
+
+SEWER = {
+    "gem_6": 473,
+    "gem_7": 474,
+    "log_sewer1": 475,
+    "gem_31": 476,
+    "song_marenol": 477,
+    "gem_8": 478,
+    "log_sewer2": 479,
+    "gem_9": 480,
+    "log_sewer3": 481,
+    "gem_10": 482,
+    "log_sewer3a": 483,
+    "gem_11": 484,
+    "gem_12": 485,
+    "log_sewer6a": 486,
+    "log_sewer6b": 487,
+    "song_opslimone": 488,
+    "log_sewer7": 489,
+    "gem_25": 490,
+    "gem_30": 491,
+    "log_hiddenmaze": 492,
+    "log_storyteller_l": 493,
+    "gem_26": 494,
+    "gem_27": 495,
+    "gem_28": 496,
+    "gem_29": 497,
+    "log_storyteller_w": 498
+}
+
+ARCHIVE = {
+    "gem_13": 406,
+    "log_archives2": 407,
+    "gem_14": 408,
+    "gem_15": 409,
+    "log_archives4": 410,
+    "gem_16": 411,
+    "gem_17": 412,
+    "gem_18": 413,
+    "log_archives7a": 414,
+    "gem_19": 415,
+    "song_seraphiel": 416
+}
+
+TEMPLE = {
+    "gem_1": 499,
+    "log_temple2": 500,
+    "gem_2": 501,
+    "log_temple4": 502,
+    "song_tormented": 503,
+    "log_temple5": 504,
+    "gem_3": 505,
+    "log_temple6": 506,
+    "gem_4": 507,
+    "log_temple7": 508,
+    "gem_5": 509
+}
+
+GROTTO = {
+    "gem_51": 448,
+    "gem_52": 449,
+    "gem_53": 450,
+    "gem_54": 451,
+    "gem_55": 452,
+    "gem_56": 453,
+    "gem_57": 454,
+    "gem_58": 455,
+    "gem_59": 456,
+    "gem_64": 457,
+    "log_grotto1": 458,
+    "log_grotto2": 459,
+    "gem_60": 460,
+    "gem_61": 461,
+    "gem_62": 462,
+    "gem_63": 463,
+    "log_grotto3": 464,
+    "log_grotto4": 465,
+    "song_doppelganger": 466,
+    "log_grotto5": 467
+}
+
+ALL_BETWEENSPACE = {
+    "Betweenspace Hub": HUB,
+    "Proof Of Soul Room": PROOF_OF_SOUL,
+    "Sewer": SEWER,
+    "Archive": ARCHIVE,
+    "Temple": TEMPLE,
+    "Grotto": GROTTO
+}

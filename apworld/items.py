@@ -12,17 +12,29 @@ if TYPE_CHECKING:
 # We will have a lookup from item name to ID here that, in world.py, we will import and bind to the world class.
 # Even if an item doesn't exist on specific options, it must be present in this lookup.
 ITEM_NAME_TO_ID = {
-    "Points": 1000
+    "Points": 1000,
+    "Battery": 1001,
+    "Betweenspace Key": 2000,
+    "Archive Key": 2001,
+    "Temple Key": 2002,
+    "Grotto Key": 2003,
+    "Proof Of Soul Key": 2004
 }
 DEFAULT_ITEM_CLASSIFICATIONS = {
-    "Points": ItemClassification.filler
+    "Points": ItemClassification.filler,
+    "Battery": ItemClassification.filler,
+    "Betweenspace Key": ItemClassification.progression,
+    "Archive Key": ItemClassification.progression,
+    "Temple Key": ItemClassification.progression,
+    "Grotto Key": ItemClassification.progression,
+    "Proof Of Soul Key": ItemClassification.progression
 }
 
 for chart_id, song in SONGS.items():
     songName = f"Song - {song['song_name']}"
     if "song_item_id" in song:
         ITEM_NAME_TO_ID[songName] = song["song_item_id"]
-        DEFAULT_ITEM_CLASSIFICATIONS[songName] = ItemClassification.progression
+        DEFAULT_ITEM_CLASSIFICATIONS[songName] = ItemClassification.progression_deprioritized_skip_balancing
 
 # Each Item instance must correctly report the "game" it belongs to.
 # To make this simple, it is common practice to subclass the basic Item class and override the "game" field.
@@ -68,15 +80,27 @@ def create_all_items(world: VSWorld) -> None:
 
     itempool: list[Item] = [ ]
 
+    itempool.append(world.create_item("Betweenspace Key"))
+    itempool.append(world.create_item("Proof Of Soul Key"))
+    itempool.append(world.create_item("Archive Key"))
+    itempool.append(world.create_item("Temple Key"))
+    itempool.append(world.create_item("Grotto Key"))
+
     for chart_id, song in SONGS.items():
         songName = f"Song - {song['song_name']}"
         if "song_item_id" in song:
             itempool.append(world.create_item(songName))
+
+    for i in range(world.options.starting_songs.value):
+        starting_song = itempool[world.random.randint(0, len(itempool) - 1)]
+        itempool.remove(starting_song)
+        world.push_precollected(starting_song)
 
     # Create Filler
     number_of_items = len(itempool)
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
     needed_number_of_filler_items = number_of_unfilled_locations - number_of_items
     itempool += [world.create_filler() for _ in range(needed_number_of_filler_items)]
+
 
     world.multiworld.itempool += itempool

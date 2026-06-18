@@ -19,17 +19,19 @@ if(type == network_type_non_blocking_connect) {
 }
 
 function debug_save_json(data, file_name) {
+	/*
 	var _buffer_size = string_byte_length(json_stringify(data, true)) + 1;
-		var _save_buffer = buffer_create(_buffer_size, buffer_fixed, 1);
+	var _save_buffer = buffer_create(_buffer_size, buffer_fixed, 1);
 
-		// 3. Write the string data into the buffer
-		buffer_write(_save_buffer, buffer_string, json_stringify(data, true));
+	// 3. Write the string data into the buffer
+	buffer_write(_save_buffer, buffer_string, json_stringify(data, true));
 
-		// 4. Save the buffer contents to a file disk
-		buffer_save(_save_buffer, file_name + ".json");
+	// 4. Save the buffer contents to a file disk
+	buffer_save(_save_buffer, file_name + ".json");
 
-		// 5. Delete the buffer from memory to prevent memory leaks
-		buffer_delete(_save_buffer);
+	// 5. Delete the buffer from memory to prevent memory leaks
+	buffer_delete(_save_buffer);
+	*/
 }
 
 var socket_id = ds_map_find_value(async_load, "id");
@@ -56,7 +58,10 @@ for (var i = 0; i < array_length(data); ++i) {
 	// i'd much rather have some sort of map structure that conatins cmd -> callback
 	switch(packet.cmd) {
 		case "Connected":
-			// global.ap_deathlink = packet.slot_data.death_link
+			global.ap_self = packet.slot_data
+			global.ap_slot = packet.slot
+			global.ap_deathlink = packet.slot_data.death_link
+			
 			ap_debug("Connection success!")
 			ap_debug("deathlink? " + string(global.ap_deathlink), "debug")
 			global.ap_slotinfo = packet.slot_info
@@ -64,6 +69,12 @@ for (var i = 0; i < array_length(data); ++i) {
 			global._ap_connection_callback({
 				success: true
 			})
+			if(global.ap_deathlink) {
+				_ap_send({
+					cmd: "ConnectUpdate",
+					tags: ["DeathLink"]
+				})
+			}
 		break;
 		case "ConnectionRefused":
 			ap_debug("Connection failed: " + string_join_ext(", ", packet.errors))
@@ -79,7 +90,7 @@ for (var i = 0; i < array_length(data); ++i) {
 			// global._ap_roominfo_callback();
 			global._ap_send({
 				cmd: "GetDataPackage",
-				games: ["vivid/stasis"]
+				games: packet.games
 			})
 		break;
 		case "ReceivedItems":
@@ -105,8 +116,8 @@ for (var i = 0; i < array_length(data); ++i) {
 			})
 			
 		break;
-			case "DataPackage":
-				var _keys = variable_struct_get_names(packet.data.games);
+		case "DataPackage":
+			var _keys = variable_struct_get_names(packet.data.games);
 			var _size = array_length(_keys);
 
 			for (var i = 0; i < _size; ++i) {
@@ -133,6 +144,13 @@ for (var i = 0; i < array_length(data); ++i) {
 
 			debug_save_json(global.ap_gamedata, "ap_gamedata")
 			ap_debug("data package")
+		break;
+		case "Bounced":
+			var _player_name = struct_get(global.ap_slotinfo, string(global.ap_slot)).name
+			if(array_contains(packet.tags, "DeathLink") && packet.data.source != _player_name && instance_exists(o_challengegauge)) {
+				global.ap_deathlink_primed = false
+				o_challengegauge.gauge = 0;
+			}
 		break;
 		default:
 			ap_debug("unknown command: " + json_stringify(packet), "warn");

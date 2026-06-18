@@ -6,6 +6,7 @@ from BaseClasses import ItemClassification, Location
 
 from . import items
 from .Songs import SONGS
+from .Betweenspace import *
 
 if TYPE_CHECKING:
     from .world import VSWorld
@@ -14,10 +15,17 @@ if TYPE_CHECKING:
 # We will have a lookup from location name to ID here that, in world.py, we will import and bind to the world class.
 # Even if a location doesn't exist on specific options, it must be present in this lookup.
 LOCATION_NAME_TO_ID = { }
+SONG_NAME_TO_ID = { }
 for chart_id, song in SONGS.items():
     songName = f"Song SS Rank Reward - {song['song_name']}"
     if "ss_rank_location_id" in song:
         LOCATION_NAME_TO_ID[songName] = song["ss_rank_location_id"]
+        SONG_NAME_TO_ID[songName] = song["ss_rank_location_id"]
+
+for region, locations in ALL_BETWEENSPACE.items():
+    for loc_id, ap_id in locations.items():
+        locName = f"{region} - {loc_id}"
+        LOCATION_NAME_TO_ID[locName] = ap_id
 
 # Each Location instance must correctly report the "game" it belongs to.
 # To make this simple, it is common practice to subclass the basic Location class and override the "game" field.
@@ -45,7 +53,17 @@ def create_regular_locations(world: VSWorld) -> None:
     # Once again, before we do anything, we can grab our regions we created by using world.get_region()
     rhythm_play = world.get_region("Rhythm Play")
 
-    rhythm_play.add_locations(LOCATION_NAME_TO_ID, VSLocation)
+    rhythm_play.add_locations(SONG_NAME_TO_ID, VSLocation)
+
+    for region, locations in ALL_BETWEENSPACE.items():
+        ap_region = world.get_region(region)
+        for loc_id in locations.keys():
+            ap_region.locations.append(VSLocation(
+                world.player,
+                f"{region} - {loc_id}",
+                world.location_name_to_id[f"{region} - {loc_id}"],
+                ap_region
+            ))
 
 
 def create_events(world: VSWorld) -> None:

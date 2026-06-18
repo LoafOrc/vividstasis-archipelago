@@ -27,8 +27,15 @@ def create_all_regions(world: VSWorld) -> None:
     menu = Region("Menu", world.player, world.multiworld)
     rhythm_play = Region("Rhythm Play", world.player, world.multiworld)
 
+    betweenspace = Region("Betweenspace Hub", world.player, world.multiworld)
+    proof_of_soul = Region("Proof Of Soul Room", world.player, world.multiworld)
+    sewer = Region("Sewer", world.player, world.multiworld)
+    archive = Region("Archive", world.player, world.multiworld)
+    temple = Region("Temple", world.player, world.multiworld)
+    grotto = Region("Grotto", world.player, world.multiworld)
+
     # Let's put all these regions in a list.
-    regions = [menu, rhythm_play]
+    regions = [menu, rhythm_play, betweenspace, proof_of_soul, sewer, archive, temple, grotto]
 
     # We now need to add these regions to multiworld.regions so that AP knows about their existence.
     world.multiworld.regions += regions
@@ -37,5 +44,17 @@ def create_all_regions(world: VSWorld) -> None:
 def connect_regions(world: VSWorld) -> None:
     menu = world.get_region("Menu")
     rhythm_play = world.get_region("Rhythm Play")
+    betweenspace = world.get_region("Betweenspace Hub")
+    proof_of_soul = world.get_region("Proof Of Soul Room")
+    sewer = world.get_region("Sewer")
+    archive = world.get_region("Archive")
+    temple = world.get_region("Temple")
+    grotto = world.get_region("Grotto")
 
     menu.connect(rhythm_play)
+    menu.connect(betweenspace, "Betweenspace Entrance", lambda state: state.has("Betweenspace Key", world.player))
+    betweenspace.connect(proof_of_soul, "Proof Of Soul Gate", lambda state: state.has("Proof Of Soul Key", world.player))
+    betweenspace.connect(sewer) # no gate on sewer
+    betweenspace.connect(archive, "Archive Gate", lambda state: state.has("Archive Key", world.player))
+    betweenspace.connect(temple, "Temple Gate", lambda state: state.has("Temple Key", world.player))
+    betweenspace.connect(grotto, "Grotto Gate", lambda state: state.has("Grotto Key", world.player))
