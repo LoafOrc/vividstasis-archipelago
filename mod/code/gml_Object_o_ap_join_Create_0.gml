@@ -1,5 +1,5 @@
 selected = 1;
-host = global.aphost;
+host = "archipelago.gg";
 port = global.apport;
 name = global.apname;
 pass = global.appass;

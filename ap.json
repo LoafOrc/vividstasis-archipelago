@@ -211,7 +211,8 @@
     },
     "grode": {
         "song_name": "grode",
-        "ss_rank_location_id": 85
+        "ss_rank_location_id": 85,
+        "song_item_id": 701
     },
     "signals": {
         "song_name": "Signals Afar",

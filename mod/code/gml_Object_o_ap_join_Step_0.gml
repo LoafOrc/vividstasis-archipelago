@@ -55,6 +55,6 @@ if (keyboard_check_pressed(vk_enter))
         global.ap_attemptconnect = true;
     }
     
-    instance_destroy(ap_handler);
+    instance_destroy(o_ap_handler);
     room_goto(scene_init);
 }

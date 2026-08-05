@@ -1,0 +1,40 @@
+{
+  "$type": "GameObject",
+  "DataName": null,
+  "Sprite": null,
+  "Visible": true,
+  "Solid": false,
+  "Depth": 0,
+  "Persistent": true,
+  "ParentObject": null,
+  "MaskSprite": null,
+  "UsesPhysics": false,
+  "IsSensor": false,
+  "CollisionShape": "Circle",
+  "Density": 0.5,
+  "Restitution": 0.1,
+  "Group": 0,
+  "LinearDamping": 0.1,
+  "AngularDamping": 0.1,
+  "Friction": 0.2,
+  "Awake": false,
+  "Kinematic": false,
+  "PhysicsVertices": [],
+  "Events": [
+    {
+      "Category": "Create",
+      "Subtype": "",
+      "CodeEntry": "gml_Object_o_ap_handler_Create_0"
+    },
+    {
+      "Category": "Other",
+      "Subtype": "AsyncNetworking",
+      "CodeEntry": "gml_Object_o_ap_handler_Other_68"
+    },
+    {
+      "Category": "Other",
+      "Subtype": "RoomStart",
+      "CodeEntry": "gml_Object_o_ap_handler_Other_4"
+    }
+  ]
+}

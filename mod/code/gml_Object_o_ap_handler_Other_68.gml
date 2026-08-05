@@ -18,18 +18,16 @@ if(type == network_type_non_blocking_connect) {
 	exit;
 }
 
+
 function debug_save_json(data, file_name) {
 	/*
 	var _buffer_size = string_byte_length(json_stringify(data, true)) + 1;
 	var _save_buffer = buffer_create(_buffer_size, buffer_fixed, 1);
 
-	// 3. Write the string data into the buffer
 	buffer_write(_save_buffer, buffer_string, json_stringify(data, true));
 
-	// 4. Save the buffer contents to a file disk
 	buffer_save(_save_buffer, file_name + ".json");
 
-	// 5. Delete the buffer from memory to prevent memory leaks
 	buffer_delete(_save_buffer);
 	*/
 }
@@ -62,6 +60,19 @@ for (var i = 0; i < array_length(data); ++i) {
 			global.ap_slot = packet.slot
 			global.ap_deathlink = packet.slot_data.death_link
 			
+			ini_open(global.profile_file)
+			var last_seed_name = ini_read_string("ap", "last_seed_name", "");
+			ap_debug("last_seed_name: " + last_seed_name, "debug")
+            if(last_seed_name != global.ap_roominfo.seed_name) {
+                 ap_debug("seed name doesn't match! clearing local ap save info and resyncing")
+                 ini_section_delete("ap");
+                 _ap_send({
+                     cmd: "Sync"
+                 });
+                 global.ap_location_checks = packet.checked_locations;
+            }
+            ini_write_string("ap", "last_seed_name", global.ap_roominfo.seed_name);
+			
 			ap_debug("Connection success!")
 			ap_debug("deathlink? " + string(global.ap_deathlink), "debug")
 			global.ap_slotinfo = packet.slot_info
@@ -70,6 +81,7 @@ for (var i = 0; i < array_length(data); ++i) {
 				success: true
 			})
 			if(global.ap_deathlink) {
+			    ap_debug("adding deathlink tag", "debug")
 				_ap_send({
 					cmd: "ConnectUpdate",
 					tags: ["DeathLink"]
@@ -77,7 +89,7 @@ for (var i = 0; i < array_length(data); ++i) {
 			}
 		break;
 		case "ConnectionRefused":
-			ap_debug("Connection failed: " + string_join_ext(", ", packet.errors))
+			ap_debug("Connection refused: " + string_join_ext(", ", packet.errors))
 			global._ap_connection_callback({
 				success: false,
 				errors: packet.errors
@@ -88,6 +100,8 @@ for (var i = 0; i < array_length(data); ++i) {
 		break;
 		case "RoomInfo":
 			// global._ap_roominfo_callback();
+			global.ap_roominfo = packet;
+			
 			global._ap_send({
 				cmd: "GetDataPackage",
 				games: packet.games
@@ -95,6 +109,7 @@ for (var i = 0; i < array_length(data); ++i) {
 		break;
 		case "ReceivedItems":
 			array_foreach(packet.items, function(item) {
+			    ap_debug("recieved item: " + string(item.item), "debug")
 				ini_open(global.profile_file)
 				ini_write_real("ap", "item_" + string(item.item), true)
 				ini_close()
@@ -111,7 +126,7 @@ for (var i = 0; i < array_length(data); ++i) {
 					name: _slot_info.name + "'s " + _item_name
 				}
 				struct_set(global.ap_location_scouts, string(loc.location), scout)
-				ap_debug("got scout info for: " + string(loc.player) + " " + string(loc.item) + " " + string(loc.location) + " " + scout.name)
+				ap_debug("got scout info for: " + string(loc.player) + " " + string(loc.item) + " " + string(loc.location) + " " + scout.name, "debug")
 				debug_save_json(scout, "locationinfo_" + string(loc.location))
 			})
 			

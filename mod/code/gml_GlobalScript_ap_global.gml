@@ -2,6 +2,13 @@
 
 function ap_debug(msg, level = "info") {
     show_debug_message("ap " + level + ": " + msg);
+    
+    var _file = file_text_open_append(working_directory + "ap_log.txt");
+
+    file_text_write_string(_file, "[" + level +"]" + ": " + msg);
+    file_text_writeln(_file);
+    
+    file_text_close(_file);
 }
 
 wss = network_socket_wss
@@ -17,6 +24,11 @@ global.ap_slot = -1
 global.ap_callbacks = {}
 global.ap_deathlink_primed = true
 
+if (file_exists(working_directory + "ap_log.txt")) {
+    file_delete(working_directory + "ap_log.txt");
+}
+show_debug_message("log file is at: " + working_directory + "ap_log.txt");
+
 // address in most cases is archipelago.gg
 // password is usually empty
 // returns a async request id
@@ -26,7 +38,7 @@ global.ap_deathlink_primed = true
 //   one or more of the archipelago error codes: "InvalidSlot", "InvalidGame", "IncompatibleVersion", "InvalidPassword", or "InvalidItemsHandling"
 //   or "ConnectFailed"
 function ap_connect(address, port, name, password, callback) {
-    ap_debug("trying to connect to " + address + ":" + string(port) + " as " + name)
+    ap_debug("trying to connect to " + address + ":" + string(port))
     global._ap_connection_callback = callback
 
     if(address == "archipelago.gg") {
@@ -38,7 +50,7 @@ function ap_connect(address, port, name, password, callback) {
     var success = network_connect_raw_async(global.ap_socket, address, port)
 
     if(success < 0) {
-        ap_debug("establishing connection failed! isConnected = " + string(isConnected), "error")
+        ap_debug(string("establishing connection failed! isConnected = {0}; success = {1}", isConnected, success), "error")
         callback({
             success: false,
             errors: ["ConnectFailed"]
@@ -77,12 +89,19 @@ function ap_struct_get_values() {
 
 }
 
+function ap_goal() {
+    _ap_send({
+        cmd: "StatusUpdate",
+        status: 30 // 30 is GOAL
+    });
+}
 
 
 function ap_send_deathlink(reason) {
-    if(!global.ap_deathlink_primed) {
+    if(!global.ap_deathlink_primed || global.op_ap_deathlinkoverride) {
         return;
     }
+    ap_debug("sending deathlink: " + reason, "debug")
     var _player_name = struct_get(global.ap_slotinfo, string(global.ap_slot)).name
     _ap_send({
         cmd: "Bounce",
@@ -112,6 +131,7 @@ function ap_check(location_id) {
         return;
     }
 
+    ap_debug("checked location: " + string(location_id), "debug")
     _ap_send({
         cmd: "LocationChecks",
         locations: [location_id]
@@ -119,6 +139,7 @@ function ap_check(location_id) {
 }
 
 function ap_scout(location_ids) {
+    ap_debug("scouting: " + string(array_length(location_ids)), "debug");
     _ap_send({
         cmd: "LocationScouts",
         locations: location_ids

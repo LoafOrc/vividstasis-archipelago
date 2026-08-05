@@ -21,8 +21,42 @@ global.ap_socket = -1
 global.ap_deathlink = false
 global.ap_connected = false
 
-show_debug_log(true);
 ap_debug("initalizing")
+
+function ss_ap_scout_text()
+{
+    return (function()
+    {
+        __CoroutineBegin(function()
+        {
+            global.skip = false;
+            global.story_paused = false;
+        });
+        __CoroutineDelay(function()
+        {
+            return 500;
+        });
+        __CoroutineThen(function()
+        {
+            instance_create_depth(0, 180, -100, o_textbox);
+            
+            with (o_textbox)
+                TweenEasyMove(0, 180, 0, 132, 0, 60, EaseOutExpo);
+            
+            name_set("");
+            text("Collected " + global.ap_last_scoutinfo.name);
+        });
+        __CoroutineAwait(check_textbox_done);
+        __CoroutineThen(function()
+        {
+            text_clear();
+            
+            with (o_textbox)
+                TweenEasyMove(0, 132, 0, 180, 0, global.gamefps, EaseOutExpo);
+        });
+        return __CoroutineEnd();
+    })();
+}
 
 if (global.ap_attemptconnect)
 {
@@ -41,10 +75,16 @@ if (global.ap_attemptconnect)
         global.ap_attemptconnect = false;
         ini_open(global.profile_file)
         var prev_checks = ini_read_string("ap", "all_locations", "");
+        ini_write_string("apglobal", "aphost", global.aphost);
+        ini_write_string("apglobal", "apport", global.apport);
+        ini_write_string("apglobal", "apname", global.apname);
+        ini_write_string("apglobal", "appass", global.appass);
         ini_close()
         
+        // currently just resends all previous checks
         if (string_length(prev_checks) > 0)
         {
+            ap_debug("resending all previous checks: " + string(prev_checks), "debug");
             var checks_split = split_string(",", prev_checks, true);
 
             for (var i = 0; i < array_length(checks_split); i++)
@@ -59,6 +99,8 @@ if (global.ap_attemptconnect)
             })
         }
 
+        var scout_ids = [];
+
         for (var i = 0; i < array_length(global.song_list); i++) {
             var song = global.song_list[i];
             var apData = struct_get(global.ap_data, song.chart_id)
@@ -68,15 +110,20 @@ if (global.ap_attemptconnect)
                 continue
             }
 
+            if(song.chart_id != "plaudite") {
+                array_push(scout_ids, int64(apData.ss_rank_location_id));
+            }
             song.ap = { 
                 ss_rank_clear_locid: apData.ss_rank_location_id
             }
+            ap_debug("ss_rank for " + song.chart_id + " is " + string(apData.ss_rank_location_id), "debug")
 
             if(!struct_exists(apData, "song_item_id")) {
                 continue
             }
 
             song.ap.song_item_id = apData.song_item_id
+            ap_debug("song_item_id for " + song.chart_id + " is " + string(apData.song_item_id), "debug")
             song.unlock = {
                 type: 1,
                 section: "ap",
@@ -88,17 +135,18 @@ if (global.ap_attemptconnect)
                 enc_hint: "Unlock from Archipelago"
             }
         }
+        ap_debug("song unlocks changed!", "debug");
 
 
         var _keys = struct_get_names(global.ap_bsdata);
         var _count = array_length(_keys);
         
-        var _values = array_create(_count);
-        
+        ap_debug("betweenspace checks: " + string(_count), "debug")
         for (var i = 0; i < _count; i++) {
-            _values[i] = int64(struct_get(global.ap_bsdata, _keys[i]));
+            ap_debug(string("betweenspace id: {0} -> ap id: {1}", _keys[i], struct_get(global.ap_bsdata, _keys[i])), "debug")
+            array_push(scout_ids, int64(struct_get(global.ap_bsdata, _keys[i])));
         }
 
-        ap_scout(_values)
+        ap_scout(scout_ids)
     })
 }
