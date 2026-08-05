@@ -7,7 +7,13 @@ function lt_aploc()
         __CoroutineBegin(function()
         {
             global.canInteract = false;
+            if (variable_global_exists("ap_last_scoutinfo")) {
             strings = ["Collected " + global.ap_last_scoutinfo.name];
+            } 
+            else 
+            {
+                strings = [];
+            }
         });
         __CoroutineForEach(function(arg0)
         {
