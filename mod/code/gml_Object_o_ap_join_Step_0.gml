@@ -25,7 +25,7 @@ if (move != 0)
     keyboard_string = string(variable_instance_get(id, fields[selected - 1]));
 }
 
-if (keyboard_check(vk_anykey))
+if (keyboard_check_pressed(vk_anykey) && move == 0) && (!keyboard_check_pressed(vk_enter)) && (!keyboard_check_pressed(vk_escape))
     variable_instance_set(id, fields[selected - 1], keyboard_string);
 
 if (keyboard_check_pressed(vk_enter))
