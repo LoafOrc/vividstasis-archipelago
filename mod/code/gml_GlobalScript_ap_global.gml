@@ -15,7 +15,9 @@ wss = network_socket_wss
 ws = network_socket_ws
 global.network_send_text = 2
 global.ap_message_preconnect_queue = []
+// current checks by the user
 global.ap_location_checks = []
+// current scouts
 global.ap_location_scouts = {}
 global.ap_slotinfo = {}
 global.ap_gamedata = {}
@@ -29,7 +31,7 @@ if (file_exists(working_directory + "ap_log.txt")) {
 }
 show_debug_message("log file is at: " + working_directory + "ap_log.txt");
 
-// address in most cases is archipelago.gg
+// address in most cases is archipelago.gg and uses secure websockets (with exception of localhost/loopback, which uses insecure websockets
 // password is usually empty
 // returns a async request id
 // callback is a function that takes in one argument: results
@@ -41,7 +43,9 @@ function ap_connect(address, port, name, password, callback) {
     ap_debug("trying to connect to " + address + ":" + string(port))
     global._ap_connection_callback = callback
 
-    if(address == "archipelago.gg") {
+    if(address == "localhost" || address == "127.0.0.1") {
+        global.ap_socket = network_create_socket(ws) // insecure
+    } else {
         global.ap_socket = network_create_socket(wss) // secure
     } else {
         global.ap_socket = network_create_socket(ws) // unsecure
