@@ -8,7 +8,7 @@ function lt_aploc()
         {
             global.canInteract = false;
             if (variable_global_exists("ap_last_scoutinfo")) {
-            strings = ["Collected " + global.ap_last_scoutinfo.name];
+                strings = ["Collected " + global.ap_last_scoutinfo.name];
             } 
             else 
             {
@@ -44,7 +44,18 @@ function lt_aploc()
 }
 
 function set_id(loc_id) {
-    self.ap_loc_id = struct_get(global.ap_bsdata, loc_id);
+    self.loc_id = loc_id;
+    if (struct_exists(global.ap_bsdata, loc_id)) {
+        self.ap_loc_id = struct_get(global.ap_bsdata, loc_id);
+    }
+    else
+    {
+        // this check doesn't exist - destroy and exit
+        show_debug_message("destroying " + loc_id);
+        instance_destroy(id);
+        return;
+    }
+       
     
     if (array_contains(global.ap_location_checks, self.ap_loc_id))
         instance_destroy(id);
@@ -53,11 +64,19 @@ function set_id(loc_id) {
 function interact()
 {
     ap_debug("interact with apcheck: " + self.loc_id + " (" + string(self.ap_loc_id) + ")", "debug");
-    global.ap_last_scoutinfo = struct_get(global.ap_location_scouts, string(self.ap_loc_id));
-    ap_check(self.ap_loc_id);
     
-    with (obj_player_actor)
-        var coroutine = lt_aploc();
-    
-    instance_destroy(id);
+    if (global.ap_connected) {
+        global.ap_last_scoutinfo = struct_get(global.ap_location_scouts, string(self.ap_loc_id));
+        ap_check(self.ap_loc_id);
+        
+        with (obj_player_actor)
+           var coroutine = lt_aploc();
+        
+        instance_destroy(id);
+    }
+    else
+    {
+        ap_debug("check can't send due to incomplete scouting information (are you online?): " + self.loc_id + " (" + string(self.ap_loc_id) + ")", "debug");
+        play_se(buzzer);
+    }
 }
