@@ -1,5 +1,8 @@
 selected = 1;
-host = "archipelago.gg";
+if (variable_global_exists("aphost"))
+    host = global.aphost;
+else
+    host = "archipelago.gg";
 port = global.apport;
 name = global.apname;
 pass = global.appass;
