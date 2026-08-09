@@ -9,7 +9,7 @@
   "BackgroundColor": 0,
   "DrawBackgroundColor": true,
   "CreationCodeEntry": null,
-  "Flags": "EnableViews, IsGM2024_13",
+  "Flags": "IsGM2024_13",
   "World": false,
   "Top": 0,
   "Left": 0,

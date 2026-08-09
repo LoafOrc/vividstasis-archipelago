@@ -44,11 +44,9 @@ function ap_connect(address, port, name, password, callback) {
     global._ap_connection_callback = callback
 
     if(address == "localhost" || address == "127.0.0.1") {
-        global.ap_socket = network_create_socket(ws) // insecure
+        global.ap_socket = network_create_socket(ws); // insecure
     } else {
-        global.ap_socket = network_create_socket(wss) // secure
-    } else {
-        global.ap_socket = network_create_socket(ws) // unsecure
+        global.ap_socket = network_create_socket(wss); // secure
     }
 
     var success = network_connect_raw_async(global.ap_socket, address, port)
