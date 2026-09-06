@@ -134,7 +134,7 @@ for (var i = 0; i < array_length(data); ++i) {
 
 			var current_room_name = room_get_name(room);
 			global.ap_logger.debug("recieved items. current_room = {0}", current_room_name);
-			if(array_contains(["scene_results_2023"], current_room_name)) {
+			if(array_contains(["scene_results_2023", "scene_songselect_old", "scene_mainmenu"], current_room_name)) {
 				ap_run_through_queue();
 			}
 		break;

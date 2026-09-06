@@ -29,4 +29,6 @@ if(current_room_name == "scene_results_2023") {
         ap_check(location);
         ap_run_through_queue();
     }
+} else if(array_contains(["scene_songselect_old", "scene_mainmenu"], current_room_name)) {
+	ap_run_through_queue();
 }
