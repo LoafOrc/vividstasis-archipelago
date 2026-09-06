@@ -1,39 +1,26 @@
+if(!variable_global_exists("_ap_socket")) {
+	exit;
+}
+
+var socket_id = ds_map_find_value(async_load, "id");
+if (socket_id != global._ap_socket.socket) {
+	global._ap_socket.debug(string("ignoring network event, socket_id = {0}, _ap_socket.socket = {1}", socket_id, global._ap_socket.socket))
+	exit;
+}
+
 var type = ds_map_find_value(async_load, "type")
 if(type == network_type_non_blocking_connect) {
 	var success = ds_map_find_value(async_load, "succeeded")
 
-	if(success > 0) {
-		ap_debug("connection established!")
-		global.ap_connected = true
-		_ap_send_arr(global.ap_message_preconnect_queue)
-		global.ap_message_preconnect_queue = []
-	} else {
-		ap_debug("failed to connect! success = " + string(success), "error")
+	if(success <= 0) {
+		global.ap_logger.error("failed to connect! success = " + string(success));
 		global._ap_connection_callback({
 			success: false,
 			errors: ["ConnectFailed"]
-		})
+		});
+		ap_disconnect();
 	}
 
-	exit;
-}
-
-
-function debug_save_json(data, file_name) {
-	/*
-	var _buffer_size = string_byte_length(json_stringify(data, true)) + 1;
-	var _save_buffer = buffer_create(_buffer_size, buffer_fixed, 1);
-
-	buffer_write(_save_buffer, buffer_string, json_stringify(data, true));
-
-	buffer_save(_save_buffer, file_name + ".json");
-
-	buffer_delete(_save_buffer);
-	*/
-}
-
-var socket_id = ds_map_find_value(async_load, "id");
-if (socket_id != global.ap_socket) {
 	exit;
 }
 
@@ -41,95 +28,60 @@ var buffer = ds_map_find_value(async_load, "buffer");
 var size = ds_map_find_value(async_load, "size");
 buffer_seek(buffer, buffer_seek_start, 0);
 var response = buffer_read(buffer, buffer_string);
-ap_debug("data from server: " + response, "debug")
 
-var data = json_parse(response)
+var data = json_parse(response);
 
 for (var i = 0; i < array_length(data); ++i) {
 	var packet = data[i];
 
 	if(!struct_exists(packet, "cmd")) {
-		ap_debug("object in array doesn't have 'cmd'!", "warn")
-		continue
+		global.ap_logger.error("object in array doesn't have 'cmd'!");
+		continue;
 	}
 
-	// i'd much rather have some sort of map structure that conatins cmd -> callback
+	if(global.ap_netlogger != pointer_null) {
+		global.ap_netlogger.log_recieved(packet);
+	}
+
+	global.ap_logger.debug("handling command: {0}", packet.cmd);
+
 	switch(packet.cmd) {
 		case "Connected":
-			global.ap_self = packet.slot_data
-			global.ap_slot = packet.slot
-			global.ap_deathlink = packet.slot_data.death_link
+			global.ap_logger.debug(string(packet));
+			global.ap_slots = {}
+			struct_foreach(packet.slot_info, method({p: packet}, function(key, value) {
+				global.ap_logger.debug("{0} is {1}", key, value);
+				if(key == self.p.slot) {
+					struct_set(global.ap_slots, key, new APLocalSlot(key, value.name, struct_get(global._ap_gamedata, value.game)));
+				} else {
+					struct_set(global.ap_slots, key, new APSlot(key, value.name, struct_get(global._ap_gamedata, value.game)));
+				}
+			}));
+			global.ap_self = struct_get(global.ap_slots, packet.slot);
+			global.ap_logger.debug(string(global.ap_self));
 			
-			ini_open(global.profile_file)
-			var last_seed_name = ini_read_string("ap", "last_seed_name", "");
-			ap_debug("last_seed_name: " + last_seed_name, "debug")
-            if(last_seed_name != global.ap_roominfo.seed_name) {
-                 ap_debug("seed name doesn't match! clearing local ap save info and resyncing")
-                 ini_section_delete("ap");
-                 _ap_send({
-                     cmd: "Sync"
-                 });
-                 global.ap_location_checks = packet.checked_locations;
-            }
-            ini_write_string("ap", "last_seed_name", global.ap_roominfo.seed_name);
-			
-			ap_debug("Connection success!")
-			ap_debug("deathlink? " + string(global.ap_deathlink), "debug")
-			global.ap_slotinfo = packet.slot_info
-			debug_save_json(global.ap_slotinfo, "ap_slotinfo")
 			global._ap_connection_callback({
 				success: true
-			})
-			if(global.ap_deathlink) {
-			    ap_debug("adding deathlink tag", "debug")
-				_ap_send({
-					cmd: "ConnectUpdate",
-					tags: ["DeathLink"]
-				})
-			}
+			});
 		break;
 		case "ConnectionRefused":
-			ap_debug("Connection refused: " + string_join_ext(", ", packet.errors))
+			global.ap_logger.error("Connection refused: " + string_join_ext(", ", packet.errors));
 			global._ap_connection_callback({
 				success: false,
 				errors: packet.errors
-			})
-			
-			// this should be handled more gracefully as archipelago lets you retry Connect commands
-			ap_disconnect()
+			});
+			ap_disconnect();
 		break;
 		case "RoomInfo":
-			// global._ap_roominfo_callback();
-			global.ap_roominfo = packet;
+			global.ap_room = new APRoom(packet.seed_name, packet.games);
 			
-			global._ap_send({
+			// todo: data package caching
+			global._ap_socket.send({
 				cmd: "GetDataPackage",
 				games: packet.games
 			})
-		break;
-		case "ReceivedItems":
-			array_foreach(packet.items, function(item) {
-			    ap_debug("recieved item: " + string(item.item), "debug")
-				ini_open(global.profile_file)
-				ini_write_real("ap", "item_" + string(item.item), true)
-				ini_close()
-			})
-		break;
-		case "LocationInfo":
-			debug_save_json(packet, "locationinfo")
-			array_foreach(packet.locations, function(loc) {
-				var _slot_info = struct_get(global.ap_slotinfo, string(loc.player))
-				var _item_name = struct_get(struct_get(global.ap_gamedata, _slot_info.game).item_id_to_name, string(loc.item))
-				var scout = {
-					item_id: loc.item,
-					player: loc.player,
-					name: _slot_info.name + "'s " + _item_name
-				}
-				struct_set(global.ap_location_scouts, string(loc.location), scout)
-				ap_debug("got scout info for: " + string(loc.player) + " " + string(loc.item) + " " + string(loc.location) + " " + scout.name, "debug")
-				debug_save_json(scout, "locationinfo_" + string(loc.location))
-			})
-			
+
+			global._ap_socket._set_connected();
 		break;
 		case "DataPackage":
 			var _keys = variable_struct_get_names(packet.data.games);
@@ -138,37 +90,76 @@ for (var i = 0; i < array_length(data); ++i) {
 			for (var i = 0; i < _size; ++i) {
 				var _key = _keys[i];
 				var _value = struct_get(packet.data.games, _key);
-				var gamedata = {
-					item_id_to_name: { }
-				}
-				
-				
-				ap_debug("Game: " + _key + "");
-				var item_name_to_id = struct_get(_value, "item_name_to_id");
-				var item_names = variable_struct_get_names(item_name_to_id);
-				var item_count = array_length(item_names)
-				for(var j = 0; j < item_count; ++j) {
-					var item_name = item_names[j]
-					var item_id = struct_get(item_name_to_id, item_name)
-					ap_debug(string(item_id) + " = " + item_name);
-					struct_set(gamedata.item_id_to_name, string(item_id), item_name)
-				}
-
-				struct_set(global.ap_gamedata, _key, gamedata)
+			
+				struct_set(global._ap_gamedata, _key, new APGameData(_key, _value));
 			}
 
-			debug_save_json(global.ap_gamedata, "ap_gamedata")
-			ap_debug("data package")
+			global._ap_socket._send_connect(); // finally we can ask to connect, now that we have the data package.
+		break;
+		case "ReceivedItems":
+			var _cur_index = packet.index;
+			var _collected_items = global.ap_self.all_collected_items();
+
+			var _items_to_add = [];
+			if(_cur_index == 0) { // this is the worst fucking behaviour i have ever seen.
+				var _size = array_length(packet.items);
+				var _item_counts = {};
+				for(var i = 0; i < _size; i++) {
+					var _value = packet.items[i];
+					var _item = global.ap_self.get_item(_value.item);
+					var _current_count = 0;
+					if(struct_exists(_item_counts, _item.name)) {
+						_current_count = struct_get(_item_counts, _item.name);
+					}
+					_current_count++;
+					struct_set(_item_counts, _item.name, _current_count);
+					if(_current_count > _item.collected()) {
+						array_push(_items_to_add, _value);
+					}
+				}
+			} else if(array_length(_collected_items) != _cur_index) {
+				global.ap_logger.error("DESYNC!! our items = {0}, archipealgo.index = {1}, triggering an ap_sync()", array_length(_collected_items), _cur_index);
+				ap_sync();
+				return;
+			} else {
+				_items_to_add = packet.items;
+			}
+
+			array_foreach(_items_to_add, function(item) {
+				global.ap_logger.debug("RecievedItems.item = {0}", item);
+				var _item = global.ap_self.get_item(item.item);
+				_item._on_recieved();
+				ap_msg_recieved(item.player, _item);
+			});
+
+			var current_room_name = room_get_name(room);
+			global.ap_logger.debug("recieved items. current_room = {0}", current_room_name);
+			if(array_contains(["scene_results_2023"], current_room_name)) {
+				ap_run_through_queue();
+			}
+		break;
+		case "LocationInfo": // todo: this should be cached as well
+			array_foreach(packet.locations, function(loc) {
+				var _slot = struct_get(global.ap_slots, loc.player);
+				var _item = _slot.get_item(loc.item);
+				
+				var _location = struct_get(global.ap_self.locations, loc.location);
+				_location.item = _item;
+				global.ap_logger.debug("{0} is at {1}", _item.full_name(), _location.name);
+			});
 		break;
 		case "Bounced":
-			var _player_name = struct_get(global.ap_slotinfo, string(global.ap_slot)).name
-			if(array_contains(packet.tags, "DeathLink") && packet.data.source != _player_name && instance_exists(o_challengegauge)) {
-				global.ap_deathlink_primed = false
-				o_challengegauge.gauge = 0;
+			if(!struct_exists(packet, "tags")) {
+				return;
+			}
+			if(array_contains(packet.tags, "DeathLink") && packet.data.source != global.ap_self.name && instance_exists(o_challengeguage)) {
+				global.ap_deathlink.primed = false;
+				o_challengeguage.gauge = 0;
+				ap_msg_deathlink(packet.data.cause);
 			}
 		break;
 		default:
-			ap_debug("unknown command: " + json_stringify(packet), "warn");
-			debug_save_json(packet, "unknown_" + packet.cmd)
+			global.ap_logger.debug("unknown command: {0}", packet.cmd);
+		break;
 	}
 }
