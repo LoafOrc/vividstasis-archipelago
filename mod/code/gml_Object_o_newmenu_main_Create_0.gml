@@ -25,9 +25,15 @@ createButton(
 {
     icon_sprite: sp_icon_rhythm_play,
     button_text: "Rhythm Play",
+	requires_ap_connection: true,
     
     activate: function()
     {
+		if(!is_ap_connected()) {
+			play_se(buzzer);
+			return;
+		}
+
         if (input_check(UnknownEnum.Value_10))
         {
             global.last_freeplay_difficulty = 0;
@@ -125,9 +131,15 @@ createButton(
     icon_sprite: sp_icon_node_flowchart,
     button_text: "Betweenspace",
     alpha_obfuscate: 1,
+	requires_ap_connection: true,
     
     activate: function()
     {
+		if(!is_ap_connected()) {
+			play_se(buzzer);
+            exit;
+		}
+
         ini_open(global.profile_file);
         
         if (!ini_read_real("ap", "item_2000", false))
