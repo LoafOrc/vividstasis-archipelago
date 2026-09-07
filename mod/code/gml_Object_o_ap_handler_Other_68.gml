@@ -119,6 +119,9 @@ for (var i = 0; i < array_length(data); ++i) {
 				}
 			} else if(array_length(_collected_items) != _cur_index) {
 				global.ap_logger.error("DESYNC!! our items = {0}, archipealgo.index = {1}, triggering an ap_sync()", array_length(_collected_items), _cur_index);
+				array_foreach(_collected_items, function(item) {
+					item._abandon();
+				});
 				ap_sync();
 				return;
 			} else {

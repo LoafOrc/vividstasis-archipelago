@@ -296,7 +296,7 @@ function ap_connect(conn, callback) {
 
 function ap_disconnect() {
 	global.ap_logger.info("disconnecting!");
-	if(!variable_global_exists("_ap_socket")) {
+	if(is_ap_connected()) {
 		network_destroy(global._ap_socket.socket);
 	}
 	global._ap_socket = undefined;
@@ -304,6 +304,10 @@ function ap_disconnect() {
 	global.ap_room = undefined;
 	global.ap_slots = undefined;
 	global.ap_self = undefined;
+}
+
+function is_ap_connected() {
+	return variable_global_exists("_ap_socket") && !is_undefined(global._ap_socket);
 }
 
 function ap_sync() {

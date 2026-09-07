@@ -150,7 +150,19 @@
     }
   ],
   "GameObjects": [
-    
+    {
+      "ObjectName": "o_ap_join",
+      "X": 0,
+      "Y": 0,
+      "CreationCodeEntry": null,
+      "ScaleX": 1,
+      "ScaleY": 1,
+      "Color": 4294967295,
+      "Rotation": 0,
+      "PreCreateCodeEntry": null,
+      "ImageSpeed": 0,
+      "ImageIndex": 0
+    }
   ],
   "Tiles": [],
   "Layers": [
