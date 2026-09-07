@@ -207,6 +207,15 @@ function APConnectionSettings(_address, _port, _name, _password) constructor {
 			slot_data: true
 		}
 	}
+
+	static write_to_save = function() {
+		ini_open(global.profile_file);
+		ini_write_string("ap_global", "host", address);
+		ini_write_string("ap_global", "port", string(port));
+		ini_write_string("ap_global", "name", name);
+		ini_write_string("ap_global", "pass", password);
+		ini_close();
+	}
 }
 
 function APConnection(_socket, _conn_settings) constructor {

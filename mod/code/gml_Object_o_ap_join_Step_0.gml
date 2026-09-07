@@ -38,6 +38,8 @@ if (keyboard_check_pressed(vk_enter))
 		ap_connect(settings, method(self, function(result) {
 			if(result.success) {
 				self.transition_to(scene_mainmenu);
+				settings.write_to_save();
+				play_se(sfx_solve_puzzle);
 			} else {
 				self.result = "Failed to connect! Reason: " + string_join_ext(", ", result.errors);
 			}
@@ -45,6 +47,4 @@ if (keyboard_check_pressed(vk_enter))
 			o_ap_handler.connection_callback(result);
 		}));
     }
-    
-    
 }
