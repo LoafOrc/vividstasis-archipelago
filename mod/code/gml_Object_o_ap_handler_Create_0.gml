@@ -21,6 +21,8 @@ function connection_callback(result) {
 		ini_section_delete("ap");
 		ini_close();
 		ap_sync();
+	} else {
+		ap_resend_checks();
 	}
 	ini_open(global.profile_file);
 	ini_write_string("ap", "last_seed_name", global.ap_room.seed_name);

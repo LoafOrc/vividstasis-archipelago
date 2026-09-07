@@ -336,12 +336,16 @@ function ap_sync() {
 		cmd: "Sync"
 	});
 
-	// resend checked locations. if the seed name is different, the save section will have already been cleared
+	// if the seed name is different, the save section will have already been cleared
+	ap_resend_checks();
+}
+
+function ap_resend_checks() {
 	var _locations = global.ap_self.all_checked_locations();
 	global._ap_socket.send({
 		cmd: "LocationChecks",
 		locations: _location_ids(_locations)
-	})
+	});
 }
 
 function ap_check(location) {
