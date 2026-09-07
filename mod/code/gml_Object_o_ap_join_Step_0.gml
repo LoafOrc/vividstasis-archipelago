@@ -27,15 +27,17 @@ if (keyboard_check_pressed(vk_enter))
     if (is_ap_connected()) {
         ap_disconnect();
         play_se(sfx_solve_puzzle);
-		transition_to(scene_init);
+		transition_to(scene_mainmenu);
     } else {
 		if (settings.port == "")
             settings.port = 0;
 		settings.port = int64(settings.port);
 		
+		result = "Connecting...";
+
 		ap_connect(settings, method(self, function(result) {
 			if(result.success) {
-				self.transition_to(scene_init);
+				self.transition_to(scene_mainmenu);
 			} else {
 				self.result = "Failed to connect! Reason: " + string_join_ext(", ", result.errors);
 			}
