@@ -267,7 +267,23 @@ global._ap_socket = undefined;
 
 global.ap_deathlink = {
 	enabled: false,
-	primed: false
+	primed: false,
+	send: function(reason) {
+		if(!global.ap_deathlink.primed || global.op_ap_deathlinkoverride) {
+			return;
+		}
+		global.ap_logger.info("sending deathlink: " + reason)
+		global._ap_socket.send({
+			cmd: "Bounce",
+			tags: ["DeathLink"],
+			data: {
+				time: unix_timestamp() + 10,
+				cause: string_replace(reason, "<player>", global.ap_self.name),
+				source: global.ap_self.name
+			}
+		});
+		global.ap_deathlink.primed = false;
+	}
 }
 
 // address in most cases is archipelago.gg and uses secure websockets (with exception of localhost/loopback, which uses insecure websockets
