@@ -3,6 +3,7 @@ function APSlot(_id, _name, _game) constructor {
 	id = _id // int, this is also known as 'slot' in the packets
 	name = _name // string, player name
 	game = _game // APGameData
+	status = 0
 
 	static get_item = function(id) {
 		var _item_name = struct_get(game.item_names, id);
@@ -27,6 +28,10 @@ function APSlot(_id, _name, _game) constructor {
 		}
 
 		return _items;
+	}
+
+	static has_completed = function() {
+		return status == 30;
 	}
 }
 
@@ -368,4 +373,6 @@ function ap_goal() {
 		cmd: "StatusUpdate",
 		status: 30 // 30 is GOAL
 	});
+	global.ap_self.status = 30;
+	ap_msg_goal();
 }

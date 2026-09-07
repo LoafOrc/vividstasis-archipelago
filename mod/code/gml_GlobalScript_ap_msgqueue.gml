@@ -81,6 +81,12 @@ function APDeathlinkMessage(_reason) constructor {
 	}
 }
 
+function APGoalMessage() constructor {
+	static get_message = function() {
+		return "`{rcolor}Goal reached!"
+	}
+}
+
 global.ap_msg_queue = [];
 global.ap_doing_queue = false;
 
@@ -91,16 +97,23 @@ function ap_msg_check(location) {
 	if(location.item.player == global.ap_self) {
 		return; // is part of the APRecievedMessage
 	}
+	if(global.ap_self.has_completed()) return;
 
 	array_insert(global.ap_msg_queue, 0, new APCheckMessage(location));
 }
 
 function ap_msg_recieved(sender, item) {
+	if(global.ap_self.has_completed()) return;
 	array_push(global.ap_msg_queue, new APRecievedMessage(sender, item));
 }
 
 function ap_msg_deathlink(reason) {
+	if(global.ap_self.has_completed()) return;
 	array_insert(global.ap_msg_queue, 0, new APDeathlinkMessage(reason));
+}
+
+function ap_msg_goal() {
+	global.ap_msg_queue = [APGoalMessage()];
 }
 
 function ap_run_through_queue() {
