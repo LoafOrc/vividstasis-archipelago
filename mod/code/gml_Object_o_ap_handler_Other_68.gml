@@ -132,11 +132,7 @@ for (var i = 0; i < array_length(data); ++i) {
 				ap_msg_recieved(item.player, _item);
 			});
 
-			var current_room_name = room_get_name(room);
-			global.ap_logger.debug("recieved items. current_room = {0}", current_room_name);
-			if(array_contains(["scene_results_2023", "scene_songselect_old", "scene_mainmenu"], current_room_name)) {
-				ap_run_through_queue();
-			}
+			ap_run_through_queue();
 		break;
 		case "LocationInfo": // todo: this should be cached as well
 			array_foreach(packet.locations, function(loc) {
@@ -153,6 +149,9 @@ for (var i = 0; i < array_length(data); ++i) {
 				return;
 			}
 			if(array_contains(packet.tags, "DeathLink") && packet.data.source != global.ap_self.name && instance_exists(o_challengeguage)) {
+				if(!global.ap_deathlink.enabled) {
+					return;
+				}
 				global.ap_deathlink.primed = false;
 				o_challengeguage.gauge = 0;
 				ap_msg_deathlink(packet.data.cause);

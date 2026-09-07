@@ -67,26 +67,26 @@ function ap_run_through_queue() {
 	if(array_length(global.ap_msg_queue) == 0 || global.ap_doing_queue) {
 		return;
 	}
+	var current_room_name = room_get_name(room);
+	global.ap_logger.debug("trying to run through queue, current_room = {0}", current_room_name);
+	if(!array_contains(["scene_results_2023", "scene_songselect_old", "scene_mainmenu"], current_room_name) && !string_starts_with(current_room_name, "rpg_")) {
+		return;
+	}
 
 	return (function() {
         __CoroutineBegin(function()
         {
 			global.skip = false;
             global.story_paused = false;
+			global.canInteract = false;
 			global.ap_doing_queue = true;
-        });
-		__CoroutineDelay(function()
-        {
-            return 500;
-        });
-		__CoroutineThen(function() {
 			instance_create_depth(0, 180, -100, o_textbox);
             
             with (o_textbox)
                 TweenEasyMove(0, 180, 0, 132, 0, 60, EaseOutExpo);
             
             name_set("");
-		});
+        });
 		__CoroutineWhile(function() {
 			return array_length(global.ap_msg_queue) != 0;
 		});
@@ -112,37 +112,7 @@ function ap_run_through_queue() {
                 TweenEasyMove(0, 132, 0, 180, 0, global.gamefps, EaseOutExpo);
 
 			global.ap_doing_queue = false;
-        });
-        return __CoroutineEnd();
-    })();
-    return (function()
-    {
-        __CoroutineBegin(function()
-        {
-            global.skip = false;
-            global.story_paused = false;
-        });
-        __CoroutineDelay(function()
-        {
-            return 500;
-        });
-        __CoroutineThen(function()
-        {
-            instance_create_depth(0, 180, -100, o_textbox);
-            
-            with (o_textbox)
-                TweenEasyMove(0, 180, 0, 132, 0, 60, EaseOutExpo);
-            
-            name_set("");
-            text("Collected " + global.ap_last_scoutinfo.name);
-        });
-        __CoroutineAwait(check_textbox_done);
-        __CoroutineThen(function()
-        {
-            text_clear();
-            
-            with (o_textbox)
-                TweenEasyMove(0, 132, 0, 180, 0, global.gamefps, EaseOutExpo);
+			global.canInteract = true;
         });
         return __CoroutineEnd();
     })();

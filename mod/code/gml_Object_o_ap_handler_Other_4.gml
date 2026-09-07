@@ -27,8 +27,48 @@ if(current_room_name == "scene_results_2023") {
 		global.ap_logger.debug("reached rank requirement");
         var location = global.song_list[global.song_id_last].ap.rank_clear_loc
         ap_check(location);
-        ap_run_through_queue();
     }
-} else if(array_contains(["scene_songselect_old", "scene_mainmenu"], current_room_name)) {
-	ap_run_through_queue();
 }
+
+if(string_starts_with(current_room_name, "rpg_")) {
+    with(o_ch0_acvortex) {
+        instance_destroy();
+    }
+    with(o_ch0_stargate) {
+        instance_destroy();
+    }
+    with(o_ch0_finallandinggate) {
+        instance_destroy();
+    }
+    with(o_ch0_void_portal) {
+        instance_destroy();
+    }
+    with(o_ch0_l2_portal) {
+        instance_destroy();
+    }
+    with(o_trigger_zone_warp) {
+        if(warpRoom = rpg_hub_5 | warpRoom = rpg_hubchrono) {
+            instance_destroy();
+        }
+    }
+    
+    with(o_ch0_song) {
+        check = instance_create_layer(x, y, "Instances", o_ap_betweenspacecheck);
+        check.set_id("song_" + string(song_id));
+        instance_destroy();
+    }
+    
+    with(o_ch0_tablet) {
+        check = instance_create_layer(x, y, "Instances", o_ap_betweenspacecheck);
+        check.set_id("tablet_" + string(tablet_id));
+        instance_destroy();
+    }
+    
+    with(o_ch0_crystal) {
+        check = instance_create_layer(x, y, "Instances", o_ap_betweenspacecheck);
+        check.set_id("gem_" + string(pickup_id));
+        instance_destroy();
+    }
+}
+
+ap_run_through_queue();

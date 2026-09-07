@@ -6,6 +6,7 @@ function load_json_from_file(_filename) {
     return json_parse(_json_string)
 }
 global.ap_data = load_json_from_file("ap.json");
+global.ap_bsdata = load_json_from_file("ap_bs_flat.json");
 
 function connection_callback(result) {
 	global.ap_logger.debug("connection callback, success = {0}", result.success);
