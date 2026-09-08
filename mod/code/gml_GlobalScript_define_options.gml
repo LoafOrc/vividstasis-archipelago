@@ -23,7 +23,7 @@ function define_options()
     },
     {
         title: "Archipelago Settings",
-        options: [57, 58]
+        options: [57, 58, 59]
     }];
     ini_open(global.profile_file);
     fin = ini_read_real("profile", "finished_game", 0);
@@ -895,9 +895,9 @@ function define_options()
         values: ["Disabled", "Enabled"],
         default_value: 1,
         key: "hide_cursor"
-    }
+    },
     // AP MOD START
-    ,{
+    {
         name: "Archipelago Join",
         description: "Join a multiworld!",
         type: 3,
@@ -926,8 +926,17 @@ function define_options()
         values: ["Archipelago", "Force Disabled"],
         default_value: 0,
         key: "ap_deathlinkoverride"
-    // AP MOD END
-    }];
+    },
+	{
+		name: "Rank Requirement",
+		description: "Minimum rank to complete a song's check.",
+		type: 0,
+		values: ["SS", "S+", "S", "AA", "A"],
+		default_value: 0,
+		key: "ap_rankreq"
+	}
+	// AP MOD END
+];
     
     for (var i = 0; i < array_length(global.system_options); i++)
     {

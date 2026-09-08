@@ -1,18 +1,34 @@
+enum Grade {
+	VS,
+	VPlus,
+	V,
+	SSPlus,
+	SS,
+	SPlus,
+	S,
+	AA,
+	A,
+	B,
+	C,
+	D,
+	E
+}
+
 var current_room_name = room_get_name(room);
+var target = global.op_ap_rankreq + 4;
 if(current_room_name == "scene_results_2023") {
-    var grade = get_score_grade(global.currentscore)
+    var grade = get_score_grade(global.currentscore);
+	global.ap_logger.debug("reached results screen. currentscore = {0}, grade = {1}, target = {2}", global.currentscore, grade, target);
     if(global.song_list[global.song_id_last].chart_id = "plaudite") {
         ap_goal();
         return;
     }
-    if(grade <= 4) { // SS is 4
-        loc_id = global.song_list[global.song_id_last].ap.ss_rank_clear_locid
-        ap_check(loc_id);
-        global.ap_last_scoutinfo = struct_get(global.ap_location_scouts, string(loc_id));
-        ss_ap_scout_text();
+    if(grade <= target) { // SS is 4
+		global.ap_logger.debug("reached rank requirement");
+        var location = global.song_list[global.song_id_last].ap.rank_clear_loc
+        ap_check(location);
     }
 }
-
 
 if(string_starts_with(current_room_name, "rpg_")) {
     with(o_ch0_acvortex) {
@@ -53,5 +69,6 @@ if(string_starts_with(current_room_name, "rpg_")) {
         check.set_id("gem_" + string(pickup_id));
         instance_destroy();
     }
-    
 }
+
+ap_run_through_queue();

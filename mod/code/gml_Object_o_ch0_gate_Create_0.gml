@@ -4,21 +4,29 @@ unlock_animation = 0;
 unlocked = false;
 ini_open(global.profile_file);
 
-if (ini_read_real("ap", @@string@@("item_{0}", gate_ap_id), false))
-{
-    ini_close();
-    instance_destroy(self);
+// todo: move to the json file so it can stay in sync with the .apworld better
+gate_ap_id = struct_get({
+	archives: 2001,
+	temple: 2002,
+	grotto: 2003,
+	final: 2004
+}, gate_name);
+
+if(!variable_global_exists("ap_self")) {
+	exit; // uh oh
 }
-else
-{
-    ini_close();
+
+var _item = global.ap_self.get_item(gate_ap_id);
+
+if (_item.collected()) {
+    instance_destroy(self);
 }
 
 true_req = gate_req;
 
 function interact()
 {
-
+	play_se(buzzer);
 }
 
 enum UnknownEnum

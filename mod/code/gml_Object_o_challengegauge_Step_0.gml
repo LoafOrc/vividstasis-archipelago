@@ -8,7 +8,7 @@ if (!no_fail)
         {
             audio_pause_all();
             play_se(sfx_failsong);
-            ap_send_deathlink("<player> couldn't keep up");
+            global.ap_deathlink.send("<player>'s life depleted"); // AP MOD
             
             
             if (global.decrypt_mode.bossfx && global.song_id_last == 132)
