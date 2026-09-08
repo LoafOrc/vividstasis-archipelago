@@ -40,27 +40,6 @@ function process_song_unlocks()
                         su[0] = true;
                     }
                     break;
-                case UnknownEnum.Value_2:
-                    var u_value = global.unlocked_event_nodes[u.node_id];
-                    if (u_value > 0)
-                    {
-                        su[0] = true;
-                    }
-                    break;
-                case UnknownEnum.Value_3:
-                    ini_open(global.profile_file);
-                    if (ini_read_real("ssv2", $"map{u.map_id}progress", 0) >= u.ep_req || (u.has_legacy_unlock && ini_read_real("soundscan", $"map{u.legacy_map_id}progress", 0) >= u.legacy_ep_req))
-                    {
-                        su[0] = true;
-                    }
-                    ini_close();
-                    break;
-                case UnknownEnum.Value_6:
-                    if (unix_timestamp() >= u.time)
-                    {
-                        su[0] = true;
-                    }
-                    break;
             }
             // AP MOD
             su[1] = su[0]
