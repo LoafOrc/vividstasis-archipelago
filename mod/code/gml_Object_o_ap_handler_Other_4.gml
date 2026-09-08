@@ -15,7 +15,7 @@ enum Grade {
 }
 
 var current_room_name = room_get_name(room);
-var target = 13;
+var target = global.op_ap_rankreq + 4;
 if(current_room_name == "scene_results_2023") {
     var grade = get_score_grade(global.currentscore);
 	global.ap_logger.debug("reached results screen. currentscore = {0}, grade = {1}, target = {2}", global.currentscore, grade, target);
