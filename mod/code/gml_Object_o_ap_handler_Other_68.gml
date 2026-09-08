@@ -59,7 +59,15 @@ for (var i = 0; i < array_length(data); ++i) {
 			}));
 			global.ap_self = struct_get(global.ap_slots, packet.slot);
 			global.ap_logger.debug(string(global.ap_self));
-			
+			global.ap_deathlink.enabled = packet.slot_data.death_link;
+			if(global.ap_deathlink.enabled) {
+				global.ap_logger.debug("enabling deathlink");
+				global._ap_socket.send({
+					cmd: "ConnectUpdate",
+					tags: ["DeathLink"]
+				})
+			}
+
 			global._ap_connection_callback({
 				success: true
 			});
@@ -117,10 +125,10 @@ for (var i = 0; i < array_length(data); ++i) {
 						array_push(_items_to_add, _value);
 					}
 				}
-			} else if(array_length(_collected_items) + 1 != _cur_index) {
+			} else if(array_length(_collected_items) != _cur_index) { // todo: sometimes _cur_index is array_length, sometimes its array_length + 1
 				global.ap_logger.error("DESYNC!! our items = {0}, archipealgo.index = {1}, triggering an ap_sync()", array_length(_collected_items), _cur_index);
 				array_foreach(_collected_items, function(item) {
-					item._abandon();
+					// item._abandon();
 				});
 				ap_sync();
 				return;
@@ -151,12 +159,12 @@ for (var i = 0; i < array_length(data); ++i) {
 			if(!struct_exists(packet, "tags")) {
 				return;
 			}
-			if(array_contains(packet.tags, "DeathLink") && packet.data.source != global.ap_self.name && instance_exists(o_challengeguage)) {
-				if(!global.ap_deathlink.enabled) {
+			if(array_contains(packet.tags, "DeathLink") && packet.data.source != global.ap_self.name && instance_exists(o_challengegauge)) {
+				if(!global.ap_deathlink.can_deathlink()) {
 					return;
 				}
+				o_challengegauge.gauge = 0;
 				global.ap_deathlink.primed = false;
-				o_challengeguage.gauge = 0;
 				ap_msg_deathlink(packet.data.cause);
 			}
 		break;

@@ -36,7 +36,7 @@
 #macro ASYNC_TIMEOUT           });__CoroutineAsyncTimeout(function(){return 
 #macro ASYNC_COMPLETE          return true;
 
-#macro AWAIT_CHECKBOX          });__CoroutineAwait(check_textbox_done);__CoroutineThen(function(){
+#macro AWAIT_TEXTBOX          });__CoroutineAwait(check_textbox_done);__CoroutineThen(function(){
 
 function APCheckMessage(_location) constructor {
 	location = _location;
@@ -77,7 +77,7 @@ function APDeathlinkMessage(_reason) constructor {
 	reason = _reason;
 
 	static get_message = function() {
-		return "`c{red}" + _reason;
+		return "`c{red}" + reason;
 	}
 }
 
@@ -142,9 +142,9 @@ function ap_run_through_queue() {
 			var _msg = array_shift(global.ap_msg_queue).get_message();
             global.ap_logger.debug("showing queued message: {0}", _msg);
 			text(_msg);
-			AWAIT_CHECKBOX
+			AWAIT_TEXTBOX
 		END
-		AWAIT_CHECKBOX
+		AWAIT_TEXTBOX
 
 		text_clear();
             

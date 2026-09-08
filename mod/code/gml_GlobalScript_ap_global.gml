@@ -277,11 +277,19 @@ global._ap_socket = undefined;
 global.ap_deathlink = {
 	enabled: false,
 	primed: false,
+	can_deathlink: function() {
+		return global.ap_deathlink.enabled && global.ap_deathlink.primed && !global.op_ap_deathlinkoverride;
+	},
 	send: function(reason) {
-		if(!global.ap_deathlink.primed || global.op_ap_deathlinkoverride) {
+		global.ap_logger.info("sending deathlink: " + reason);
+		if(!global.ap_deathlink.can_deathlink()) {
+			global.ap_logger.info(
+				"cant deathlink; enabled = {0}, primed = {1}, override = {2}", 
+				global.ap_deathlink.enabled, global.ap_deathlink.primed, global.op_ap_deathlinkoverride
+			);
 			return;
 		}
-		global.ap_logger.info("sending deathlink: " + reason)
+		
 		global._ap_socket.send({
 			cmd: "Bounce",
 			tags: ["DeathLink"],
